@@ -1,0 +1,196 @@
+{
+  "intents": [
+    {
+      "tag": "greeting",
+      "patterns": [
+        "hello", "hi", "hey", "good morning", "good evening", "what's up", "howdy", "sup"
+      ],
+      "responses": [
+        "Hey there! I'm GymBuddy 💪 Ready to crush your fitness goals?",
+        "Hi! Welcome to GymBuddy. Tell me what you want to work on today!",
+        "Hello! Let's get moving. What can I help you with?"
+      ]
+    },
+    {
+      "tag": "goodbye",
+      "patterns": [
+        "bye", "goodbye", "see you", "later", "quit", "exit", "cya"
+      ],
+      "responses": [
+        "Stay consistent! See you next session 💪",
+        "Keep grinding! Goodbye!",
+        "Rest well and come back stronger. Bye!"
+      ]
+    },
+    {
+      "tag": "workout_schedule",
+      "patterns": [
+        "make me a workout schedule", "create a workout plan", "give me a training plan",
+        "I need a workout routine", "build me a schedule", "weekly workout", "training program",
+        "what should I train", "gym schedule", "workout plan for the week", "set up my training"
+      ],
+      "responses": ["__SCHEDULE__"]
+    },
+    {
+      "tag": "chest_workout",
+      "patterns": [
+        "how to do bench press", "chest exercises", "how to train chest", "chest workout",
+        "pec exercises", "chest routine", "how do I build my chest", "chest day"
+      ],
+      "responses": [
+        "Here's a great chest workout:\n\n🏋️ **Chest Day**\n1. Bench Press — 4x8 reps\n2. Incline Dumbbell Press — 3x10 reps\n3. Cable Flyes — 3x12 reps\n4. Push-ups — 3x failure\n\n💡 **Tip:** Keep your shoulder blades retracted and drive through your chest, not your arms."
+      ]
+    },
+    {
+      "tag": "back_workout",
+      "patterns": [
+        "back exercises", "how to train back", "back workout", "lat exercises",
+        "how to do deadlift", "pull day", "back day", "how to build back"
+      ],
+      "responses": [
+        "Here's your back workout:\n\n🏋️ **Back Day**\n1. Deadlifts — 4x5 reps\n2. Pull-ups — 4x max reps\n3. Barbell Rows — 3x8 reps\n4. Lat Pulldown — 3x12 reps\n5. Seated Cable Row — 3x12 reps\n\n💡 **Tip:** Hinge at the hips for deadlifts. Keep your chest up and core braced."
+      ]
+    },
+    {
+      "tag": "leg_workout",
+      "patterns": [
+        "leg exercises", "how to train legs", "leg workout", "squat tips",
+        "how to do squats", "leg day", "how to build legs", "glute exercises"
+      ],
+      "responses": [
+        "Let's not skip leg day! 🦵\n\n🏋️ **Leg Day**\n1. Barbell Squat — 4x8 reps\n2. Romanian Deadlift — 3x10 reps\n3. Leg Press — 3x12 reps\n4. Walking Lunges — 3x20 steps\n5. Calf Raises — 4x15 reps\n\n💡 **Tip:** Go deep on squats — break parallel for maximum glute activation."
+      ]
+    },
+    {
+      "tag": "shoulder_workout",
+      "patterns": [
+        "shoulder exercises", "how to train shoulders", "shoulder workout",
+        "deltoid exercises", "overhead press tips", "shoulder day", "boulder shoulders"
+      ],
+      "responses": [
+        "Build those boulders! 🎯\n\n🏋️ **Shoulder Day**\n1. Overhead Press — 4x8 reps\n2. Lateral Raises — 4x15 reps\n3. Front Raises — 3x12 reps\n4. Reverse Flyes — 3x15 reps\n5. Face Pulls — 3x15 reps\n\n💡 **Tip:** Don't shrug during lateral raises. Initiate with the deltoid, not the trap."
+      ]
+    },
+    {
+      "tag": "arm_workout",
+      "patterns": [
+        "arm exercises", "bicep workout", "tricep workout", "how to build arms",
+        "curl tips", "how to do curls", "arm day", "how to get big arms"
+      ],
+      "responses": [
+        "Time to get those guns! 💪\n\n🏋️ **Arm Day**\n*Biceps:*\n1. Barbell Curl — 4x10\n2. Hammer Curl — 3x12\n3. Concentration Curl — 3x12\n\n*Triceps:*\n1. Skull Crushers — 4x10\n2. Tricep Dips — 3x12\n3. Overhead Tricep Extension — 3x12\n\n💡 **Tip:** Control the eccentric (lowering) phase for maximum muscle growth."
+      ]
+    },
+    {
+      "tag": "cardio",
+      "patterns": [
+        "cardio exercises", "how to do cardio", "running tips", "lose weight cardio",
+        "fat burning cardio", "how to improve stamina", "cardio workout", "endurance training"
+      ],
+      "responses": [
+        "Let's get that heart pumping! ❤️‍🔥\n\n🏃 **Cardio Options:**\n1. **HIIT** (20 mins) — 30s sprint / 30s rest x 10 rounds\n2. **Steady State** — 30-45 min jog at 65-70% max HR\n3. **Jump Rope** — 15 mins, great for fat burn\n4. **Cycling** — 45 mins moderate pace\n\n💡 **Tip:** For fat loss, do cardio AFTER weights — your glycogen is depleted, so your body burns fat faster."
+      ]
+    },
+    {
+      "tag": "diet_bulking",
+      "patterns": [
+        "diet for bulking", "what to eat to gain muscle", "bulking diet", "muscle gain diet",
+        "how to bulk", "foods for muscle", "eating for gains", "calorie surplus"
+      ],
+      "responses": [
+        "🍗 **Bulking Diet Guide**\n\n**Calorie Target:** Bodyweight (lbs) × 16-18 = daily calories\n\n**Macros:**\n• Protein: 1g per lb of bodyweight\n• Carbs: 40-50% of total calories\n• Fats: 25-35% of total calories\n\n**Best Foods:**\n🥩 Chicken, beef, eggs, tuna\n🍚 Rice, oats, sweet potato, pasta\n🥑 Avocado, olive oil, nuts\n\n💡 **Tip:** Eat every 3-4 hours. Don't skip breakfast — it breaks your overnight fast and fuels morning training."
+      ]
+    },
+    {
+      "tag": "diet_cutting",
+      "patterns": [
+        "diet for cutting", "how to lose fat", "cutting diet", "fat loss diet",
+        "what to eat to lose weight", "calorie deficit", "shredding diet", "lean diet"
+      ],
+      "responses": [
+        "🥗 **Cutting Diet Guide**\n\n**Calorie Target:** Bodyweight (lbs) × 12-14 = daily calories\n\n**Macros:**\n• Protein: 1-1.2g per lb (keep muscle!)\n• Carbs: 30-40% of total calories\n• Fats: 20-30% of total calories\n\n**Best Foods:**\n🐟 White fish, egg whites, Greek yogurt\n🥦 All vegetables (eat freely!)\n🍇 Berries, apples (low sugar fruits)\n\n💡 **Tip:** Eat protein first at every meal — it's the most satiating macro and protects your muscle."
+      ]
+    },
+    {
+  "tag": "diet_general",
+  "patterns": [
+    "diet tips", "healthy eating", "what should I eat", "nutrition advice",
+    "meal plan", "what to eat for fitness", "diet advice", "food for gym",
+    "give me a diet plan", "diet plan", "make me a diet plan", "nutrition plan",
+    "food plan", "eating plan", "what do I eat", "meal suggestions"
+  ],
+  "responses": ["__DIET__"]
+    },
+    {
+      "tag": "protein",
+      "patterns": [
+        "how much protein", "protein intake", "protein requirements", "do I need protein",
+        "protein shakes", "best protein foods", "protein for muscle"
+      ],
+      "responses": [
+        "🥩 **Protein 101**\n\n**Recommended:** 0.8g–1g per pound of bodyweight daily\n\n**Best Protein Sources:**\n• Chicken breast — 31g per 100g\n• Eggs — 6g per egg\n• Greek yogurt — 17g per cup\n• Whey protein shake — 25g per scoop\n• Tuna — 30g per can\n• Lentils — 18g per cup (great for vegetarians!)\n\n💡 **Tip:** Spread protein across 4-5 meals. Your body can't fully absorb 100g of protein in one sitting."
+      ]
+    },
+    {
+      "tag": "beginner_advice",
+      "patterns": [
+        "I am a beginner", "just starting gym", "new to working out", "beginner workout",
+        "how to start going to gym", "gym for beginners", "I've never worked out before",
+        "where do I start", "starting fitness"
+      ],
+      "responses": [
+        "Welcome to your fitness journey! 🌟\n\n**Beginner's Starting Point:**\n\n1. **Start with 3 days/week** — Your body needs time to recover\n2. **Learn the basics first** — Squat, deadlift, bench press, rows, overhead press\n3. **Focus on form over weight** — Injury prevention is #1\n4. **Follow a structured program** — Try a Full Body routine (Push/Pull/Legs comes later)\n5. **Be consistent** — 3 months of consistent training beats 3 weeks of intense training\n\n💡 **Tip:** Log your workouts. Progress tracking is one of the strongest motivators."
+      ]
+    },
+    {
+      "tag": "motivation",
+      "patterns": [
+        "I don't feel like working out", "I'm lazy", "motivate me", "I want to give up",
+        "I'm tired of the gym", "no motivation", "I don't want to go", "help me stay motivated"
+      ],
+      "responses": [
+        "Remember WHY you started 🔥\n\nEvery rep you do today is an investment in your future self. The people you admire didn't get there by skipping days — they showed up even when they didn't feel like it.\n\n**Quick Motivation Hack:**\nTell yourself: 'I'll just do 10 minutes.' Once you start, you'll almost always finish.\n\n💪 You got this. Let's GO.",
+        "The only workout you'll regret is the one you didn't do. Your body is capable of more than your mind thinks. Push through! 🔥"
+      ]
+    },
+    {
+      "tag": "rest_recovery",
+      "patterns": [
+        "how much rest", "rest days", "how to recover", "recovery tips", "sore muscles",
+        "DOMS", "overtraining", "how many rest days", "muscle soreness"
+      ],
+      "responses": [
+        "💤 **Recovery is Where You GROW**\n\n**Recommended Rest:**\n• Beginners: 2-3 rest days/week\n• Intermediate: 1-2 rest days/week\n• Advanced: 1 full rest day minimum\n\n**Active Recovery Tips:**\n1. Light walking or swimming\n2. Stretching / mobility work\n3. Foam rolling sore areas\n4. 7-9 hours of sleep\n5. Stay hydrated (3-4L water/day)\n\n💡 **Tip:** Muscle is built during REST, not during the workout. Never neglect recovery."
+      ]
+    },
+    {
+  "tag": "bmi",
+  "patterns": [
+    "calculate my bmi", "what is my bmi", "bmi calculator", "am I overweight",
+    "check my bmi", "body mass index", "compute my bmi", "get my bmi",
+    "find my bmi", "my bmi", "bmi check", "what's my bmi", "bmi please",
+    "show my bmi", "bmi result", "calculate bmi"
+  ],
+  "responses": ["__BMI__"]
+    },
+    {
+      "tag": "profile",
+      "patterns": [
+        "update my profile", "change my details", "set my goal", "update my weight",
+        "my profile", "set my information", "update height", "change my fitness goal"
+      ],
+      "responses": ["__PROFILE__"]
+    },
+    {
+      "tag": "thanks",
+      "patterns": [
+        "thank you", "thanks", "appreciate it", "that helped", "ty", "thx", "nice"
+      ],
+      "responses": [
+        "Anytime! Now go lift something heavy 💪",
+        "You're welcome! Stay consistent and results will follow 🔥",
+        "Happy to help! Remember: discipline beats motivation every time."
+      ]
+    }
+  ]
+}
