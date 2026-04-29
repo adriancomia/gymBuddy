@@ -270,4 +270,4 @@ if __name__ == '__main__':
     print("\n🏋️  GymBuddy AI Backend Running")
     print("API: http://localhost:5000")
     print("Health check: http://localhost:5000/health\n")
-    app.run(debug=True, port=5000)
+    app.run(host='0.0.0.0', port=5000, debug=False)
