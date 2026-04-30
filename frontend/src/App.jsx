@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import "./App.css";
 
-const API_URL = "http://localhost:5000";
+const API_URL = "https://gymbuddy-api-1wit.onrender.com";
 
 const QUICK_PROMPTS = [
   { label: "💪 Workout Schedule", message: "Make me a workout schedule" },
