@@ -237,6 +237,7 @@ def chat():
 
     else:
         response = get_response_for_tag(predicted_tag)
+        
 
     return jsonify({
         "response": response,
