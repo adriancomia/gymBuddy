@@ -19,11 +19,11 @@ nltk.download('wordnet', quiet=True)
 nltk.download('punkt', quiet=True)
 
 app = Flask(__name__)
-CORS(app)  # Allow React frontend to connect
+CORS(app)
 
 lemmatizer = WordNetLemmatizer()
 
-# ─── Load Model ─────────────────────────────────────────────────────────────
+# ─── Load Model ──────────────────────────────────────────────────────────────
 MODEL_PATH = 'gymbuddy_model.pkl'
 INTENTS_PATH = 'intents_data.pkl'
 
@@ -38,17 +38,16 @@ with open(INTENTS_PATH, 'rb') as f:
 
 print("✅ Model loaded successfully")
 
-# ─── Helpers ────────────────────────────────────────────────────────────────
+# ─── Helpers ─────────────────────────────────────────────────────────────────
 def preprocess(text):
     number_map = {'0': 'o', '1': 'i', '3': 'e', '4': 'a', '5': 's', '7': 't'}
     text = ''.join(number_map.get(c, c) for c in text)
-    text = str(TextBlob(text).correct())  # autocorrect misspellings
+    text = str(TextBlob(text).correct())
     text = text.lower()
     text = re.sub(r'[^a-z0-9\s]', '', text)
     tokens = text.split()
     tokens = [lemmatizer.lemmatize(t) for t in tokens]
     return ' '.join(tokens)
-
 
 def get_response_for_tag(tag):
     for intent in intents:
@@ -69,13 +68,32 @@ def calculate_bmi(weight_kg, height_cm):
         category = "Obese"
     return round(bmi, 1), category
 
-def generate_schedule(profile):
-    goal = profile.get('goal', 'general fitness').lower()
-    level = profile.get('experience', 'beginner').lower()
-    days_per_week = profile.get('daysPerWeek', 3)
+def extract_days_from_message(msg_lower):
+    """Try to extract number of days from the message text."""
+    day_words = {
+        'one': 1, 'two': 2, 'three': 3, 'four': 4,
+        'five': 5, 'six': 6, 'seven': 7,
+        '1': 1, '2': 2, '3': 3, '4': 4,
+        '5': 5, '6': 6, '7': 7
+    }
+    for word, num in day_words.items():
+        if word in msg_lower:
+            return num
+    return None
 
-    if days_per_week <= 3:
-        # Full Body Program
+def generate_schedule(profile, override_days=None):
+    goal = profile.get('goal', 'general fitness').lower()
+    days_per_week = override_days if override_days else profile.get('daysPerWeek', 3)
+
+    if days_per_week <= 2:
+        plan = {
+            "type": "Full Body Program",
+            "schedule": [
+                {"day": "Monday", "focus": "Full Body A", "exercises": ["Squat 3x8", "Bench Press 3x8", "Bent-over Row 3x8", "OHP 3x10", "Plank 3x30s"]},
+                {"day": "Thursday", "focus": "Full Body B", "exercises": ["Deadlift 3x5", "Incline Press 3x10", "Pull-ups 3x max", "Lunges 3x12", "Core circuit"]},
+            ]
+        }
+    elif days_per_week == 3:
         plan = {
             "type": "Full Body Program",
             "schedule": [
@@ -85,7 +103,6 @@ def generate_schedule(profile):
             ]
         }
     elif days_per_week == 4:
-        # Upper/Lower Split
         plan = {
             "type": "Upper/Lower Split",
             "schedule": [
@@ -96,7 +113,6 @@ def generate_schedule(profile):
             ]
         }
     else:
-        # Push/Pull/Legs
         plan = {
             "type": "Push/Pull/Legs (PPL)",
             "schedule": [
@@ -121,7 +137,6 @@ def generate_schedule(profile):
 def generate_diet_plan(profile):
     weight_kg = profile.get('weight', 70)
     goal = profile.get('goal', 'general fitness').lower()
-    
     weight_lbs = weight_kg * 2.205
 
     if 'weight loss' in goal or 'cut' in goal:
@@ -156,7 +171,7 @@ def generate_diet_plan(profile):
         ]
     }
 
-# ─── Routes ─────────────────────────────────────────────────────────────────
+# ─── Routes ──────────────────────────────────────────────────────────────────
 @app.route('/health', methods=['GET'])
 def health():
     return jsonify({"status": "ok", "model": "GymBuddy TF-IDF Classifier"})
@@ -173,24 +188,159 @@ def chat():
     if not user_message:
         return jsonify({"error": "Empty message"}), 400
 
-    # Predict intent
-    processed = preprocess(user_message)
-    print(f"Input: '{user_message}' → Processed: '{processed}'")
-    predicted_tag = pipeline.predict([processed])[0]
-    confidence = pipeline.predict_proba([processed]).max()
+    msg_lower = user_message.lower()
 
-    # Low confidence fallback
+    # ─── Keyword Shortcuts ───────────────────────────────────────────────────
+    override_days = None
+
+    if any(w in msg_lower for w in ['bmi', 'body mass']):
+        predicted_tag = 'bmi'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['diet plan', 'meal plan', 'what should i eat', 'give me a diet', 'food plan']):
+        predicted_tag = 'diet_general'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['workout schedule', 'training plan', 'workout plan', 'make me a schedule', 'training schedule', 'times a week', 'days a week']):
+        predicted_tag = 'workout_schedule'
+        confidence = 1.0
+        override_days = extract_days_from_message(msg_lower)
+
+    elif any(w in msg_lower for w in ['protein intake', 'how much protein', 'protein need', 'my protein', 'protein requirement', 'protein use my weight']):
+        predicted_tag = 'protein'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['pre meal', 'premeal', 'pre-meal', 'before gym', 'what to eat before', 'pre workout meal', 'meal before', 'are pre meals']):
+        predicted_tag = 'pre_workout_meal'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['how many sets', 'how many reps', 'sets and reps', 'rep range', 'how much volume', 'sets of squat', 'sets per']):
+        predicted_tag = 'sets_reps'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['good form', 'proper form', 'how to do', 'technique', 'correct form', 'form for']):
+        if any(w in msg_lower for w in ['squat', 'leg', 'lunge']):
+            predicted_tag = 'leg_workout'
+        elif any(w in msg_lower for w in ['bench', 'chest', 'push up', 'pushup']):
+            predicted_tag = 'chest_workout'
+        elif any(w in msg_lower for w in ['deadlift', 'pull', 'row', 'back']):
+            predicted_tag = 'back_workout'
+        elif any(w in msg_lower for w in ['shoulder', 'overhead', 'ohp', 'press']):
+            predicted_tag = 'shoulder_workout'
+        elif any(w in msg_lower for w in ['curl', 'bicep', 'tricep', 'arm']):
+            predicted_tag = 'arm_workout'
+        else:
+            predicted_tag = 'leg_workout'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['motivate me', 'no motivation', 'feel like giving up', 'i dont want to', "don't feel like", 'lazy', 'demotivated']):
+        predicted_tag = 'motivation'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['rest day', 'recovery', 'sore muscle', 'how many rest', 'overtraining', 'doms']):
+        predicted_tag = 'rest_recovery'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['beginner', 'just started', 'new to gym', 'never worked out', 'starting out', 'where do i start']):
+        predicted_tag = 'beginner_advice'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['nutrition', 'what to eat', 'healthy food', 'clean eating', 'eating healthy']):
+        predicted_tag = 'diet_general'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['chest', 'bench press', 'pec']):
+        predicted_tag = 'chest_workout'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['back workout', 'lat', 'deadlift', 'pull up', 'pullup', 'pull-up']):
+        predicted_tag = 'back_workout'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['leg workout', 'squat', 'leg day', 'lunges', 'hamstring', 'glute']):
+        predicted_tag = 'leg_workout'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['shoulder workout', 'deltoid', 'lateral raise', 'ohp']):
+        predicted_tag = 'shoulder_workout'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['arm workout', 'bicep', 'tricep', 'curl']):
+        predicted_tag = 'arm_workout'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['cardio', 'running', 'fat burn', 'hiit', 'endurance', 'stamina']):
+        predicted_tag = 'cardio'
+        confidence = 1.0
+
+    else:
+        # Fall back to ML model
+        processed = preprocess(user_message)
+        print(f"Input: '{user_message}' → Processed: '{processed}'")
+        predicted_tag = pipeline.predict([processed])[0]
+        confidence = pipeline.predict_proba([processed]).max()
+
+    # ─── Low Confidence Fallback ─────────────────────────────────────────────
     if confidence < 0.20:
         response = "I'm not quite sure I understood that 🤔 Try asking about workouts, diet tips, your schedule, or exercises like squats or bench press!"
         return jsonify({"response": response, "tag": "unknown", "confidence": round(float(confidence), 2)})
 
-    # Handle special dynamic responses
-    if predicted_tag == 'workout_schedule':
+    # ─── Dynamic Responses ────────────────────────────────────────────────────
+    if predicted_tag == 'protein':
         if not user_profile.get('weight'):
-            response = "I'd love to build you a schedule! Please **set up your profile first** so I can personalize it for your goals and experience level. Click the profile icon above 👆"
+            response = "Please **set up your profile first** so I can calculate your exact protein needs! Click the profile icon 👆"
         else:
-            plan, tip = generate_schedule(user_profile)
-            schedule_text = f"🗓️ **Your {plan['type']} Schedule**\n\n"
+            weight_lbs = user_profile['weight'] * 2.205
+            min_protein = int(weight_lbs * 0.8)
+            max_protein = int(weight_lbs * 1.0)
+            response  = f"🥩 **Your Daily Protein Target**\n\n"
+            response += f"**Your Weight:** {user_profile['weight']}kg\n"
+            response += f"**Recommended:** {min_protein}g – {max_protein}g per day\n\n"
+            response += f"**Best Sources:**\n"
+            response += f"  • Chicken breast — 31g per 100g\n"
+            response += f"  • Eggs — 6g per egg\n"
+            response += f"  • Greek yogurt — 17g per cup\n"
+            response += f"  • Whey protein shake — 25g per scoop\n"
+            response += f"  • Tuna — 30g per can\n"
+            response += f"  • Lentils — 18g per cup\n\n"
+            response += f"💡 **Tip:** Spread protein across 4-5 meals for maximum absorption!"
+
+    elif predicted_tag == 'pre_workout_meal':
+        response  = "🍌 **Pre-Workout Nutrition**\n\n"
+        response += "**Should you eat before training?** YES — it fuels performance!\n\n"
+        response += "**Timing:**\n"
+        response += "  • Large meal: 2-3 hours before\n"
+        response += "  • Small snack: 30-60 mins before\n\n"
+        response += "**Best Pre-Workout Foods:**\n"
+        response += "  • Banana + peanut butter 🍌\n"
+        response += "  • Oats with honey\n"
+        response += "  • Rice + chicken (2hrs before)\n"
+        response += "  • Greek yogurt + berries\n\n"
+        response += "**What to avoid:**\n"
+        response += "  • High fat foods (slow digestion)\n"
+        response += "  • High fiber foods (bloating)\n"
+        response += "  • Eating right before training\n\n"
+        response += "💡 **Tip:** Carbs = fuel for your workout. Don't train fasted unless you're used to it!"
+
+    elif predicted_tag == 'sets_reps':
+        response  = "📊 **Sets & Reps Guide**\n\n"
+        response += "**For Strength (heavy weight):**\n"
+        response += "  • 3-5 sets × 3-6 reps · Rest: 3-5 mins\n\n"
+        response += "**For Muscle Growth (hypertrophy):**\n"
+        response += "  • 3-4 sets × 8-12 reps · Rest: 60-90 secs\n\n"
+        response += "**For Endurance (light weight):**\n"
+        response += "  • 2-3 sets × 15-20 reps · Rest: 30-60 secs\n\n"
+        response += "**Per workout:**\n"
+        response += "  • Compound lifts (squat, bench): 4-5 sets\n"
+        response += "  • Isolation exercises (curls): 3 sets\n\n"
+        response += "💡 **Tip:** Beginners do best starting with 3×10 on all exercises!"
+
+    elif predicted_tag == 'workout_schedule':
+        if not user_profile.get('weight'):
+            response = "I'd love to build you a schedule! Please **set up your profile first** so I can personalize it. Click the profile icon 👆"
+        else:
+            plan, tip = generate_schedule(user_profile, override_days)
+            schedule_text  = f"🗓️ **Your {plan['type']} Schedule**\n\n"
             for session in plan['schedule']:
                 schedule_text += f"**{session['day']} — {session['focus']}**\n"
                 for ex in session['exercises']:
@@ -201,10 +351,10 @@ def chat():
 
     elif predicted_tag == 'diet_general':
         if not user_profile.get('weight'):
-            response = "To give you a personalized diet plan, please **set up your profile** first! I need your weight and goal to calculate your macros. Click the profile icon above 👆"
+            response = "To give you a personalized diet plan, please **set up your profile** first! Click the profile icon 👆"
         else:
             diet = generate_diet_plan(user_profile)
-            response = f"🥗 **Your Personalized Diet Plan**\n\n"
+            response  = f"🥗 **Your Personalized Diet Plan**\n\n"
             response += f"**Goal:** {diet['meal_focus']}\n"
             response += f"**Daily Calories:** {diet['daily_calories']} kcal\n\n"
             response += f"**Macros:**\n"
@@ -217,10 +367,10 @@ def chat():
 
     elif predicted_tag == 'bmi':
         if not user_profile.get('weight') or not user_profile.get('height'):
-            response = "To calculate your BMI, I need your **weight and height**. Please set up your profile first! Click the profile icon above 👆"
+            response = "To calculate your BMI, I need your **weight and height**. Please set up your profile first! Click the profile icon 👆"
         else:
             bmi, category = calculate_bmi(user_profile['weight'], user_profile['height'])
-            response = f"📊 **Your BMI Results**\n\n"
+            response  = f"📊 **Your BMI Results**\n\n"
             response += f"**BMI:** {bmi}\n"
             response += f"**Category:** {category}\n\n"
             if category == "Underweight":
@@ -233,11 +383,10 @@ def chat():
                 response += "💡 Prioritize fat loss through diet (80%) and exercise (20%). Start with 3 days/week of mixed cardio and weights."
 
     elif predicted_tag == 'profile':
-        response = "To update your profile, click the **profile icon** in the top right corner. You can set your age, weight, height, fitness goal, and experience level there!"
+        response = "To update your profile, click the **profile icon** in the bottom left corner. You can set your age, weight, height, fitness goal, and experience level there!"
 
     else:
         response = get_response_for_tag(predicted_tag)
-        
 
     return jsonify({
         "response": response,
@@ -247,26 +396,21 @@ def chat():
 
 @app.route('/profile/validate', methods=['POST'])
 def validate_profile():
-    """Validate and return computed stats for a user profile."""
     profile = request.get_json()
     if not profile:
         return jsonify({"error": "No profile data"}), 400
-
     result = {}
-
     if profile.get('weight') and profile.get('height'):
         bmi, category = calculate_bmi(profile['weight'], profile['height'])
         result['bmi'] = bmi
         result['bmi_category'] = category
-
     if profile.get('weight') and profile.get('goal'):
         diet = generate_diet_plan(profile)
         result['recommended_calories'] = diet['daily_calories']
         result['recommended_macros'] = diet['macros']
-
     return jsonify(result)
 
-# ─── Run ────────────────────────────────────────────────────────────────────
+# ─── Run ──────────────────────────────────────────────────────────────────────
 if __name__ == '__main__':
     print("\n🏋️  GymBuddy AI Backend Running")
     print("API: http://localhost:5000")

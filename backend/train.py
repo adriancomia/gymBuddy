@@ -1,8 +1,3 @@
-"""
-GymBuddy AI - Model Training Script
-Trains a TF-IDF + Logistic Regression intent classifier on intents.json
-Run this ONCE to generate the model files: gymbuddy_model.pkl and vectorizer.pkl
-"""
 
 import json
 import pickle

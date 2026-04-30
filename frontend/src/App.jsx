@@ -68,8 +68,7 @@ function ProfileModal({ profile, onSave, onClose }) {
           <div className="form-row">
             <label>Days/week available</label>
             <div className="button-group">
-              {[3,4,5,6].map(d => <button key={d} className={`option-btn ${form.daysPerWeek === d ? "active" : ""}`} onClick={() => set("daysPerWeek", d)}>{d}</button>)}
-            </div>
+{[1,2,3,4,5,6,7].map(d => <button key={d} className={`option-btn ${form.daysPerWeek === d ? "active" : ""}`} onClick={() => set("daysPerWeek", d)}>{d}</button>)}            </div>
           </div>
         </div>
         <div className="modal-footer">
