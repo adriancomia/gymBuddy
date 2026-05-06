@@ -294,12 +294,16 @@ def chat():
         predicted_tag = 'cardio'
         confidence = 1.0
 
+    elif any(w in msg_lower for w in ['calories burn', 'calorie burn', 'how many calories', 'how much calories', 'burn in a run', 'calories running', 'calories walking', 'calories workout']):
+        predicted_tag = 'calorie_burn'
+        confidence = 1.0
+
     else:
         processed = preprocess(user_message)
         print(f"Input: '{user_message}' → Processed: '{processed}'")
         predicted_tag = pipeline.predict([processed])[0]
         confidence = pipeline.predict_proba([processed]).max()
-
+        
     # ─── Low Confidence Fallback ──────────────────────────────────────────────
     if confidence < 0.20:
         response = "I'm not quite sure I understood that 🤔 Try asking about workouts, diet tips, your schedule, or exercises like squats or bench press!"
