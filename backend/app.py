@@ -69,10 +69,11 @@ def calculate_bmi(weight_kg, height_cm):
     return round(bmi, 1), category
 
 def extract_days_from_message(msg_lower):
-    """Try to extract number of days from the message text."""
     day_words = {
-        'one': 1, 'two': 2, 'three': 3, 'four': 4,
-        'five': 5, 'six': 6, 'seven': 7,
+        'one': 1, 'whole': 1, 'once': 1,
+        'two': 2, 'twice': 2,
+        'three': 3, 'four': 4,
+        'five': 5, 'six': 6, 'seven': 7, 'everyday': 7, 'every day': 7,
         '1': 1, '2': 2, '3': 3, '4': 4,
         '5': 5, '6': 6, '7': 7
     }
@@ -189,12 +190,23 @@ def chat():
         return jsonify({"error": "Empty message"}), 400
 
     msg_lower = user_message.lower()
-
-    # ─── Keyword Shortcuts ───────────────────────────────────────────────────
     override_days = None
 
+    # ─── Keyword Shortcuts ────────────────────────────────────────────────────
     if any(w in msg_lower for w in ['bmi', 'body mass']):
         predicted_tag = 'bmi'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['creatine', 'supplement', 'pre workout', 'preworkout', 'whey', 'bcaa', 'protein powder', 'mass gainer']):
+        predicted_tag = 'supplements'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['should i do walks', 'walking', 'should i walk', 'mix running', 'running and lifting', 'cardio and weights', 'combine cardio']):
+        predicted_tag = 'cardio_lifting'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['sweet treat', 'cheat meal', 'cheat day', 'junk food', 'can i eat', 'is it okay to eat', 'is it ok to eat', 'unhealthy food']):
+        predicted_tag = 'cheat_meal'
         confidence = 1.0
 
     elif any(w in msg_lower for w in ['diet plan', 'meal plan', 'what should i eat', 'give me a diet', 'food plan']):
@@ -218,19 +230,28 @@ def chat():
         predicted_tag = 'sets_reps'
         confidence = 1.0
 
-    elif any(w in msg_lower for w in ['good form', 'proper form', 'how to do', 'technique', 'correct form', 'form for']):
-        if any(w in msg_lower for w in ['squat', 'leg', 'lunge']):
-            predicted_tag = 'leg_workout'
-        elif any(w in msg_lower for w in ['bench', 'chest', 'push up', 'pushup']):
-            predicted_tag = 'chest_workout'
-        elif any(w in msg_lower for w in ['deadlift', 'pull', 'row', 'back']):
-            predicted_tag = 'back_workout'
-        elif any(w in msg_lower for w in ['shoulder', 'overhead', 'ohp', 'press']):
+    elif any(w in msg_lower for w in ['stretch', 'stretching', 'flexibility', 'warm up', 'warmup', 'cool down', 'cooldown', 'post workout stretch', 'before workout stretch']):
+        predicted_tag = 'stretching'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['good form', 'proper form', 'how to do', 'technique', 'correct form', 'form for', 'form on']):
+        has_squat = any(w in msg_lower for w in ['squat', 'lunge'])
+        has_bench = any(w in msg_lower for w in ['bench', 'chest', 'push up', 'pushup'])
+        has_deadlift = any(w in msg_lower for w in ['deadlift', 'dead lift'])
+        if has_squat and has_bench:
+            predicted_tag = 'combined_form'
+        elif has_deadlift:
+            predicted_tag = 'deadlift_form'
+        elif has_bench:
+            predicted_tag = 'bench_form'
+        elif has_squat:
+            predicted_tag = 'squat_form'
+        elif any(w in msg_lower for w in ['shoulder', 'overhead', 'ohp']):
             predicted_tag = 'shoulder_workout'
         elif any(w in msg_lower for w in ['curl', 'bicep', 'tricep', 'arm']):
             predicted_tag = 'arm_workout'
         else:
-            predicted_tag = 'leg_workout'
+            predicted_tag = 'squat_form'
         confidence = 1.0
 
     elif any(w in msg_lower for w in ['motivate me', 'no motivation', 'feel like giving up', 'i dont want to', "don't feel like", 'lazy', 'demotivated']):
@@ -274,19 +295,167 @@ def chat():
         confidence = 1.0
 
     else:
-        # Fall back to ML model
         processed = preprocess(user_message)
         print(f"Input: '{user_message}' → Processed: '{processed}'")
         predicted_tag = pipeline.predict([processed])[0]
         confidence = pipeline.predict_proba([processed]).max()
 
-    # ─── Low Confidence Fallback ─────────────────────────────────────────────
+    # ─── Low Confidence Fallback ──────────────────────────────────────────────
     if confidence < 0.20:
         response = "I'm not quite sure I understood that 🤔 Try asking about workouts, diet tips, your schedule, or exercises like squats or bench press!"
         return jsonify({"response": response, "tag": "unknown", "confidence": round(float(confidence), 2)})
 
     # ─── Dynamic Responses ────────────────────────────────────────────────────
-    if predicted_tag == 'protein':
+    if predicted_tag == 'stretching':
+        is_post = any(w in msg_lower for w in ['post', 'after', 'cool down', 'cooldown'])
+        is_pre = any(w in msg_lower for w in ['pre', 'before', 'warm up', 'warmup'])
+        if is_post:
+            response  = "🧘 **Post-Workout Stretches**\n\n"
+            response += "Hold each stretch for **30-60 seconds**\n\n"
+            response += "**Lower Body:**\n"
+            response += "  • Hip flexor stretch — kneel on one knee, push hips forward\n"
+            response += "  • Hamstring stretch — sit and reach for your toes\n"
+            response += "  • Pigeon pose — great for glutes and hips\n"
+            response += "  • Quad stretch — stand, pull foot to glute\n\n"
+            response += "**Upper Body:**\n"
+            response += "  • Cross-arm shoulder stretch\n"
+            response += "  • Overhead tricep stretch\n"
+            response += "  • Chest opener — clasp hands behind back\n"
+            response += "  • Cat-cow for spine mobility\n\n"
+            response += "💡 **Tip:** Post-workout stretching reduces soreness and improves flexibility. Never skip it!"
+        elif is_pre:
+            response  = "🔥 **Pre-Workout Warm-Up**\n\n"
+            response += "Do **dynamic stretches** before training — never static!\n\n"
+            response += "**5-Minute Warm-Up:**\n"
+            response += "  • Jumping jacks — 30 seconds\n"
+            response += "  • Arm circles — 20 reps each direction\n"
+            response += "  • Leg swings — 15 reps each leg\n"
+            response += "  • Hip circles — 10 reps each direction\n"
+            response += "  • Bodyweight squats — 15 reps\n"
+            response += "  • Inchworms — 5 reps\n\n"
+            response += "💡 **Tip:** Warm-up increases blood flow and reduces injury risk. Always do it before lifting heavy!"
+        else:
+            response  = "🧘 **Stretching Guide**\n\n"
+            response += "**Pre-Workout (Dynamic):** Move through the range of motion\n"
+            response += "  • Leg swings, arm circles, hip rotations\n"
+            response += "  • Never hold static stretches before lifting!\n\n"
+            response += "**Post-Workout (Static):** Hold for 30-60 seconds\n"
+            response += "  • Hip flexors, hamstrings, chest, shoulders\n"
+            response += "  • This is when you improve flexibility\n\n"
+            response += "💡 **Tip:** Ask me about 'pre workout stretches' or 'post workout stretches' for a full routine!"
+
+    elif predicted_tag == 'supplements':
+        response  = "💊 **Supplements Guide**\n\n"
+        response += "**The Basics (Worth It):**\n"
+        response += "  • **Creatine Monohydrate** — increases strength and power output. 5g/day, most researched supplement ✅\n"
+        response += "  • **Whey Protein** — convenient protein source post-workout. 25g per scoop ✅\n"
+        response += "  • **Caffeine** — improves focus and endurance. Coffee works fine ✅\n\n"
+        response += "**Optional:**\n"
+        response += "  • **BCAA** — only useful if you train fasted\n"
+        response += "  • **Fish Oil** — good for joint health and inflammation\n"
+        response += "  • **Vitamin D** — important if you don't get much sunlight\n\n"
+        response += "**Not Worth It:**\n"
+        response += "  • Fat burners, testosterone boosters, most 'proprietary blends'\n\n"
+        response += "💡 **Tip:** Food first, supplements second. Creatine is the only supplement with strong evidence for muscle and strength gains!"
+
+    elif predicted_tag == 'cardio_lifting':
+        response  = "🏃 **Should You Mix Running & Lifting?**\n\n"
+        response += "**Yes — but order matters!**\n\n"
+        response += "**Best Order:**\n"
+        response += "  1. Lift weights FIRST\n"
+        response += "  2. Do cardio AFTER\n\n"
+        response += "**Why?** Lifting requires maximum energy and focus. Cardio after burns more fat since glycogen is depleted.\n\n"
+        response += "**Walking specifically:**\n"
+        response += "  • Walking is low impact and great for recovery\n"
+        response += "  • 8,000-10,000 steps/day burns significant calories\n"
+        response += "  • Won't interfere with muscle growth at all\n"
+        response += "  • Great to do on rest days\n\n"
+        response += "💡 **Tip:** Don't do intense cardio the day before a heavy leg day — your performance will suffer!"
+
+    elif predicted_tag == 'cheat_meal':
+        response  = "🍕 **Cheat Meals & Treats**\n\n"
+        response += "**Short answer: Yes, it's okay! 🎉**\n\n"
+        response += "**The 80/20 Rule:**\n"
+        response += "  • Eat clean 80% of the time\n"
+        response += "  • The other 20% won't ruin your progress\n\n"
+        response += "**Benefits of cheat meals:**\n"
+        response += "  • Refills glycogen stores (great before a big workout)\n"
+        response += "  • Boosts leptin levels — helps fat burning long term\n"
+        response += "  • Improves mental sustainability of your diet\n\n"
+        response += "**Tips:**\n"
+        response += "  • Plan it — don't let it become a cheat weekend\n"
+        response += "  • Enjoy it guilt-free, then get back on track\n"
+        response += "  • Once a week is fine for most people\n\n"
+        response += "💡 **Tip:** Consistency over weeks matters more than perfection on any single day!"
+
+    elif predicted_tag == 'squat_form':
+        response  = "🦵 **Proper Squat Form**\n\n"
+        response += "**Setup:**\n"
+        response += "  • Bar on upper traps, feet shoulder-width apart\n"
+        response += "  • Toes pointed slightly outward (30°)\n\n"
+        response += "**The Movement:**\n"
+        response += "  1. Take a deep breath, brace your core\n"
+        response += "  2. Push knees out in line with toes\n"
+        response += "  3. Sit back and down — break parallel\n"
+        response += "  4. Keep chest up, don't let it cave forward\n"
+        response += "  5. Drive through heels to stand up\n\n"
+        response += "**Common Mistakes:**\n"
+        response += "  ❌ Knees caving inward\n"
+        response += "  ❌ Heels coming off the floor\n"
+        response += "  ❌ Not going deep enough\n\n"
+        response += "💡 **Tip:** Film yourself from the side — if your chest drops before hips rise, the weight is too heavy!"
+
+    elif predicted_tag == 'bench_form':
+        response  = "🏋️ **Proper Bench Press Form**\n\n"
+        response += "**Setup:**\n"
+        response += "  • Retract shoulder blades — pinch them together\n"
+        response += "  • Slight arch in lower back, feet flat on floor\n"
+        response += "  • Grip slightly wider than shoulder-width\n\n"
+        response += "**The Movement:**\n"
+        response += "  1. Unrack with straight arms\n"
+        response += "  2. Lower bar slowly to mid-chest\n"
+        response += "  3. Keep elbows at 45° — not flared out\n"
+        response += "  4. Drive the bar up and slightly back\n"
+        response += "  5. Lock out at the top\n\n"
+        response += "**Common Mistakes:**\n"
+        response += "  ❌ Bouncing the bar off your chest\n"
+        response += "  ❌ Elbows flaring at 90°\n"
+        response += "  ❌ Lifting your butt off the bench\n\n"
+        response += "💡 **Tip:** Think 'push yourself away from the bar' not 'push the bar up'!"
+
+    elif predicted_tag == 'deadlift_form':
+        response  = "🏋️ **Proper Deadlift Form**\n\n"
+        response += "**Setup:**\n"
+        response += "  • Bar over mid-foot, hip-width stance\n"
+        response += "  • Grip just outside your legs\n"
+        response += "  • Hips higher than knees, chest up\n\n"
+        response += "**The Movement:**\n"
+        response += "  1. Take a big breath, brace your core hard\n"
+        response += "  2. Push the floor away — leg drive first\n"
+        response += "  3. Keep the bar dragging up your shins\n"
+        response += "  4. Hips and shoulders rise at the same rate\n"
+        response += "  5. Lock out by squeezing glutes at the top\n\n"
+        response += "**Common Mistakes:**\n"
+        response += "  ❌ Rounding your lower back\n"
+        response += "  ❌ Bar drifting away from your body\n"
+        response += "  ❌ Jerking the bar off the floor\n\n"
+        response += "💡 **Tip:** The deadlift is a PUSH not a pull — push the ground away with your legs!"
+
+    elif predicted_tag == 'combined_form':
+        response  = "🏋️ **Squat & Bench Press Form Guide**\n\n"
+        response += "**Squat:**\n"
+        response += "  • Feet shoulder-width, toes slightly out\n"
+        response += "  • Keep chest up, core braced\n"
+        response += "  • Break parallel for full glute activation\n"
+        response += "  • Drive through heels on the way up\n\n"
+        response += "**Bench Press:**\n"
+        response += "  • Retract shoulder blades into the bench\n"
+        response += "  • Grip slightly wider than shoulder-width\n"
+        response += "  • Lower bar to mid-chest, elbows at 45°\n"
+        response += "  • Drive through chest, not just arms\n\n"
+        response += "💡 **Tip:** Film yourself from the side to check your form on both lifts!"
+
+    elif predicted_tag == 'protein':
         if not user_profile.get('weight'):
             response = "Please **set up your profile first** so I can calculate your exact protein needs! Click the profile icon 👆"
         else:
