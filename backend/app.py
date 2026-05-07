@@ -197,6 +197,26 @@ def chat():
         predicted_tag = 'bmi'
         confidence = 1.0
 
+    elif any(w in msg_lower for w in ['good form', 'proper form', 'how to do', 'technique', 'correct form', 'form for', 'form on', 'proper squat', 'proper bench', 'proper deadlift']):
+        has_squat = any(w in msg_lower for w in ['squat', 'lunge'])
+        has_bench = any(w in msg_lower for w in ['bench', 'chest', 'push up', 'pushup'])
+        has_deadlift = any(w in msg_lower for w in ['deadlift', 'dead lift'])
+        if has_squat and has_bench:
+            predicted_tag = 'combined_form'
+        elif has_deadlift:
+            predicted_tag = 'deadlift_form'
+        elif has_bench:
+            predicted_tag = 'bench_form'
+        elif has_squat:
+            predicted_tag = 'squat_form'
+        elif any(w in msg_lower for w in ['shoulder', 'overhead', 'ohp']):
+            predicted_tag = 'shoulder_workout'
+        elif any(w in msg_lower for w in ['curl', 'bicep', 'tricep', 'arm']):
+            predicted_tag = 'arm_workout'
+        else:
+            predicted_tag = 'squat_form'
+        confidence = 1.0        
+
     elif any(w in msg_lower for w in ['creatine', 'supplement', 'preworkout', 'whey', 'bcaa', 'protein powder', 'mass gainer']):
         predicted_tag = 'supplements'
         confidence = 1.0
@@ -352,26 +372,6 @@ def chat():
 
     elif any(w in msg_lower for w in ['stretch', 'stretching', 'flexibility', 'warm up', 'warmup', 'cool down', 'cooldown', 'post workout stretch', 'before workout stretch']):
         predicted_tag = 'stretching'
-        confidence = 1.0
-
-    elif any(w in msg_lower for w in ['good form', 'proper form', 'how to do', 'technique', 'correct form', 'form for', 'form on']):
-        has_squat = any(w in msg_lower for w in ['squat', 'lunge'])
-        has_bench = any(w in msg_lower for w in ['bench', 'chest', 'push up', 'pushup'])
-        has_deadlift = any(w in msg_lower for w in ['deadlift', 'dead lift'])
-        if has_squat and has_bench:
-            predicted_tag = 'combined_form'
-        elif has_deadlift:
-            predicted_tag = 'deadlift_form'
-        elif has_bench:
-            predicted_tag = 'bench_form'
-        elif has_squat:
-            predicted_tag = 'squat_form'
-        elif any(w in msg_lower for w in ['shoulder', 'overhead', 'ohp']):
-            predicted_tag = 'shoulder_workout'
-        elif any(w in msg_lower for w in ['curl', 'bicep', 'tricep', 'arm']):
-            predicted_tag = 'arm_workout'
-        else:
-            predicted_tag = 'squat_form'
         confidence = 1.0
 
     elif any(w in msg_lower for w in ['motivate me', 'no motivation', 'feel like giving up', 'i dont want to', "don't feel like", 'lazy', 'demotivated']):
