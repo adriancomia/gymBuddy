@@ -281,7 +281,7 @@ export default function App() {
           <>
             <div className="sidebar-top">
 <div className="sidebar-logo">
-  <span className="logo-icon">🏋️</span>
+  <img src="/gymbuddy-avatar.jpg" alt="GymBuddy" className="sidebar-logo-img" />
   <span className="logo-text">GymBuddy</span>
 </div>              <button className="toggle-btn" onClick={() => setSidebarOpen(false)}>‹</button>
             </div>
