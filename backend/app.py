@@ -298,6 +298,122 @@ def chat():
         predicted_tag = 'calorie_burn'
         confidence = 1.0
 
+    elif any(w in msg_lower for w in ['okay to work out', 'ok to work out', 'workout when sore', 'train when sore', 'exercise when sore', 'if im sore']):
+        predicted_tag = 'rest_recovery'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['best exercises to start', 'exercises to start', 'what exercises should i do', 'exercises to lose fat', 'exercises to build muscle', 'best type of exercise', 'exercises for heart']):
+        predicted_tag = 'beginner_advice'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['how often should i work out', 'how often workout', 'how many times a week should i', 'how frequent']):
+        predicted_tag = 'workout_frequency'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['how much water', 'water intake', 'how much water should', 'hydration', 'drink water']):
+        predicted_tag = 'hydration'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['manage weight', 'weight management', 'maintain weight', 'control weight']):
+        predicted_tag = 'weight_management'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['tough workout', 'get through workout', 'hard workout', 'push through', 'belly fat', 'lose belly', 'what to do after cardio', 'after cardio']):
+        predicted_tag = 'workout_tips'
+        confidence = 1.0    
+
+    elif any(w in msg_lower for w in ['empty stomach', 'fasted workout', 'fasted training', 'workout without eating']):
+        predicted_tag = 'fasted_workout'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['how long until', 'when will i see results', 'visible results', 'how long to see']):
+        predicted_tag = 'results_timeline'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['safe exercise', 'after having a baby', 'postpartum', 'after pregnancy']):
+        predicted_tag = 'postpartum'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['progressive overload', 'what is progressive', 'how to progress']):
+        predicted_tag = 'progressive_overload'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['slim and strong', 'slim strong', 'lean and strong', 'toned body', 'slim body']):
+        predicted_tag = 'slim_strong'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['lower body fat', 'exercise to lower body fat', 'reduce body fat', 'lose body fat']):
+        predicted_tag = 'lower_body_fat'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['how often should i work out', 'how often workout', 'how frequent']):
+        predicted_tag = 'workout_frequency'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['how much water', 'water intake', 'hydration', 'drink water']):
+        predicted_tag = 'hydration'
+        confidence = 1.0      
+
+    elif any(w in msg_lower for w in ['fasting while', 'fasted workout', 'fasted training', 'empty stomach', 'workout without eating']):
+        predicted_tag = 'fasted_workout'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['first time in gym', 'tips for gym', 'first day gym', 'gym for first time', 'never been to gym']):
+        predicted_tag = 'first_time_gym'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['lose weight fast', 'fastest way to lose', 'quick weight loss', 'how to lose weight']):
+        predicted_tag = 'weight_loss_tips'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['gain weight', 'how to gain weight', 'too skinny', 'underweight', 'cant gain weight']):
+        predicted_tag = 'gain_weight'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['abs', 'six pack', 'core workout', 'how to get abs', 'flat stomach', 'stomach exercise']):
+        predicted_tag = 'abs_workout'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['sleep', 'how much sleep', 'sleep for muscle', 'sleep and gym', 'sleep recovery']):
+        predicted_tag = 'sleep'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['injury', 'hurt', 'pain during workout', 'knee pain', 'back pain', 'shoulder pain', 'wrist pain']):
+        predicted_tag = 'injury'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['gym bag', 'what to bring to gym', 'gym essentials', 'what do i need for gym']):
+        predicted_tag = 'gym_essentials'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['home workout', 'workout at home', 'no gym', 'without gym', 'no equipment']):
+        predicted_tag = 'home_workout'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['plateau', 'not seeing progress', 'stuck', 'no progress', 'stopped losing weight', 'not gaining muscle']):
+        predicted_tag = 'plateau'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['how to breathe', 'breathing during', 'breathing while lifting', 'when to breathe']):
+        predicted_tag = 'breathing'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['gym anxiety', 'scared of gym', 'nervous at gym', 'intimidated by gym', 'shy at gym']):
+        predicted_tag = 'gym_anxiety'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['what to eat after', 'post workout food', 'after workout meal', 'eat after gym']):
+        predicted_tag = 'post_workout_meal'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['how to bulk', 'bulking tips', 'dirty bulk', 'clean bulk', 'lean bulk']):
+        predicted_tag = 'bulking'
+        confidence = 1.0
+
+    elif any(w in msg_lower for w in ['how to cut', 'cutting tips', 'cutting phase', 'shredding', 'get shredded', 'get lean']):
+        predicted_tag = 'cutting'
+        confidence = 1.0          
+
     else:
         processed = preprocess(user_message)
         print(f"Input: '{user_message}' → Processed: '{processed}'")
@@ -537,6 +653,386 @@ def chat():
             response += "**Sample Meals:**\n"
             for meal in diet['meals']:
                 response += f"  🍽️ **{meal['name']}:** {meal['example']}\n"
+
+    elif predicted_tag == 'workout_frequency':
+        response  = "📅 **How Often Should You Work Out?**\n\n"
+        response += "**By Goal:**\n"
+        response += "  • Weight Loss: 4-5 days/week (mix cardio + weights)\n"
+        response += "  • Muscle Gain: 3-5 days/week (resistance training)\n"
+        response += "  • General Fitness: 3 days/week is enough to start\n\n"
+        response += "**By Experience:**\n"
+        response += "  • Beginner: 3 days/week — your body needs recovery time\n"
+        response += "  • Intermediate: 4 days/week\n"
+        response += "  • Advanced: 5-6 days/week\n\n"
+        response += "💡 **Tip:** More is not always better. Recovery is when you actually grow — never skip rest days!"
+
+    elif predicted_tag == 'hydration':
+        response  = "💧 **How Much Water Should You Drink?**\n\n"
+        response += "**General Rule:** 35ml per kg of bodyweight per day\n\n"
+        if user_profile.get('weight'):
+            daily = round(user_profile['weight'] * 0.035, 1)
+            response += f"**Your target:** ~{daily}L per day based on your weight\n\n"
+        response += "**For Athletes — drink more when:**\n"
+        response += "  • Training sessions (add 500ml-1L per hour of exercise)\n"
+        response += "  • Hot weather\n"
+        response += "  • High intensity workouts\n\n"
+        response += "**Signs of dehydration:**\n"
+        response += "  • Dark yellow urine\n"
+        response += "  • Headaches during workout\n"
+        response += "  • Muscle cramps\n\n"
+        response += "💡 **Tip:** Drink a glass of water first thing in the morning before anything else!"
+
+    elif predicted_tag == 'weight_management':
+        response  = "⚖️ **Weight Management Guide**\n\n"
+        response += "**To Lose Weight:**\n"
+        response += "  • Eat in a calorie deficit (300-500 kcal below maintenance)\n"
+        response += "  • High protein diet to preserve muscle\n"
+        response += "  • Combine cardio + strength training\n\n"
+        response += "**To Gain Weight:**\n"
+        response += "  • Eat in a calorie surplus (300-500 kcal above maintenance)\n"
+        response += "  • Focus on resistance training\n"
+        response += "  • Eat every 3-4 hours\n\n"
+        response += "**To Maintain Weight:**\n"
+        response += "  • Eat at maintenance calories\n"
+        response += "  • Stay consistent with exercise\n\n"
+        response += "💡 **Tip:** Set up your profile and ask for a diet plan — I'll calculate your exact calorie target!"
+
+    elif predicted_tag == 'workout_tips':
+        response  = "💪 **Workout Tips & Advice**\n\n"
+        response += "**To Push Through a Tough Workout:**\n"
+        response += "  • Break it into smaller chunks — 'just 5 more reps'\n"
+        response += "  • Use music to boost energy\n"
+        response += "  • Train with a partner for accountability\n"
+        response += "  • Remember your WHY\n\n"
+        response += "**To Lose Belly Fat:**\n"
+        response += "  • You can't spot reduce — full body fat loss is the way\n"
+        response += "  • Best exercises: HIIT, compound lifts, cardio\n"
+        response += "  • Diet is 80% of the result — calorie deficit is key\n\n"
+        response += "**After Cardio:**\n"
+        response += "  • Stretch for 5-10 minutes\n"
+        response += "  • Rehydrate — drink water immediately\n"
+        response += "  • Eat protein within 30-60 mins\n"
+        response += "  • Rest or do light activity next day\n\n"
+        response += "💡 **Tip:** Consistency beats perfection every single time!" 
+
+    elif predicted_tag == 'fasted_workout':
+        response  = "🌅 **Working Out on an Empty Stomach**\n\n"
+        response += "**For Fat Loss:** Fasted cardio can burn slightly more fat — best for walking or light jog\n\n"
+        response += "**For Strength Training:** NOT recommended — you need fuel to lift heavy\n\n"
+        response += "**Best approach:**\n"
+        response += "  • Light snack 30-60 mins before (banana, oats, yogurt)\n"
+        response += "  • Never do heavy lifting completely fasted\n\n"
+        response += "💡 **Tip:** At minimum, have a banana and coffee before morning weight training!"
+
+    elif predicted_tag == 'results_timeline':
+        response  = "⏱️ **When Will You See Results?**\n\n"
+        response += "  • **Week 1-2:** More energy, better sleep\n"
+        response += "  • **Week 3-4:** Strength increases, clothes fit better\n"
+        response += "  • **Month 2-3:** Visible muscle tone, noticeable fat loss\n"
+        response += "  • **Month 3-6:** Significant body change\n"
+        response += "  • **6-12 months:** Dramatic transformation\n\n"
+        response += "💡 **Tip:** Take progress photos every 2-4 weeks — the mirror lies but photos don't. Trust the process!"
+
+    elif predicted_tag == 'postpartum':
+        response  = "👶 **Safe Exercise After Having a Baby**\n\n"
+        response += "**Always consult your doctor first!**\n\n"
+        response += "**Timeline:**\n"
+        response += "  • 0-6 weeks: Rest, gentle walking only\n"
+        response += "  • 6-12 weeks: Light exercise after doctor clearance\n"
+        response += "  • 3+ months: Gradually return to normal training\n\n"
+        response += "**Safe to start:**\n"
+        response += "  • Walking, pelvic floor exercises, gentle yoga\n\n"
+        response += "**Avoid initially:**\n"
+        response += "  • Running, jumping, heavy lifting, core exercises\n\n"
+        response += "💡 **Tip:** Listen to your body — recovery varies for everyone!"
+
+    elif predicted_tag == 'progressive_overload':
+        response  = "📈 **What is Progressive Overload?**\n\n"
+        response += "Gradually increasing demands on your muscles so they keep growing.\n\n"
+        response += "**Ways to Apply It:**\n"
+        response += "  • Add more weight each week\n"
+        response += "  • Do more reps (8 → 10)\n"
+        response += "  • Do more sets (3 → 4)\n"
+        response += "  • Rest less between sets\n\n"
+        response += "**Example:**\n"
+        response += "  Week 1: Bench 60kg x 3x8\n"
+        response += "  Week 2: Bench 60kg x 3x10\n"
+        response += "  Week 3: Bench 62.5kg x 3x8\n\n"
+        response += "💡 **Tip:** Log your workouts every session — you can't progress what you don't track!"
+
+    elif predicted_tag == 'slim_strong':
+        response  = "💪 **Slim & Strong Body**\n\n"
+        response += "**Training:**\n"
+        response += "  • Resistance training 3-4x/week\n"
+        response += "  • Compound lifts: squat, deadlift, bench, rows\n"
+        response += "  • Add 2-3 cardio sessions per week\n"
+        response += "  • Don't only do cardio — you'll lose muscle too\n\n"
+        response += "**Diet:**\n"
+        response += "  • Slight calorie deficit (200-300 below maintenance)\n"
+        response += "  • High protein: 1g per lb of bodyweight\n"
+        response += "  • Don't crash diet — you'll lose muscle not fat\n\n"
+        response += "💡 **Tip:** The combo of lifting + calorie deficit + high protein is the formula for a slim strong body!"
+
+    elif predicted_tag == 'lower_body_fat':
+        response  = "🔥 **How to Lower Body Fat**\n\n"
+        response += "**The Truth:** You can't spot reduce fat — you lose it all over\n\n"
+        response += "**Best Exercises:**\n"
+        response += "  • HIIT — burns the most calories in least time\n"
+        response += "  • Compound lifts (squat, deadlift) — burns fat + builds muscle\n"
+        response += "  • Steady state cardio — 30-45 min jog\n"
+        response += "  • Walking — underrated, great for daily calorie burn\n\n"
+        response += "**Diet is 80% of the result:**\n"
+        response += "  • Calorie deficit of 300-500 kcal/day\n"
+        response += "  • High protein to preserve muscle while losing fat\n\n"
+        response += "💡 **Tip:** Ask me for a personalized diet plan — I'll calculate your exact calorie target based on your weight!"
+
+    elif predicted_tag == 'workout_frequency':
+        response  = "📅 **How Often Should You Work Out?**\n\n"
+        response += "**By Experience:**\n"
+        response += "  • Beginner: 3 days/week\n"
+        response += "  • Intermediate: 4 days/week\n"
+        response += "  • Advanced: 5-6 days/week\n\n"
+        response += "**By Goal:**\n"
+        response += "  • Weight Loss: 4-5 days (mix cardio + weights)\n"
+        response += "  • Muscle Gain: 3-5 days (resistance training)\n"
+        response += "  • General Fitness: 3 days is enough to start\n\n"
+        response += "💡 **Tip:** More is not always better. Recovery is when you grow — never skip rest days!"
+
+    elif predicted_tag == 'hydration':
+        response  = "💧 **How Much Water Should You Drink?**\n\n"
+        response += "**General Rule:** 35ml per kg of bodyweight per day\n\n"
+        if user_profile.get('weight'):
+            daily = round(user_profile['weight'] * 0.035, 1)
+            response += f"**Your target:** ~{daily}L per day based on your {user_profile['weight']}kg\n\n"
+        response += "**Drink more when:**\n"
+        response += "  • Training (add 500ml-1L per hour of exercise)\n"
+        response += "  • Hot weather or sweating heavily\n\n"
+        response += "**Signs of dehydration:**\n"
+        response += "  • Dark yellow urine\n"
+        response += "  • Headaches during workout\n"
+        response += "  • Muscle cramps\n\n"
+        response += "💡 **Tip:** Drink a glass of water first thing every morning!"  
+
+    elif predicted_tag == 'first_time_gym':
+        response  = "🌟 **Tips for Your First Time at the Gym**\n\n"
+        response += "**Before You Go:**\n"
+        response += "  • Wear comfortable clothes and proper shoes\n"
+        response += "  • Bring water, a towel, and headphones\n"
+        response += "  • Go during off-peak hours (early morning or midday)\n\n"
+        response += "**At the Gym:**\n"
+        response += "  • Start with machines — they're safer for beginners\n"
+        response += "  • Don't be afraid to ask staff for help\n"
+        response += "  • Wipe equipment after use\n"
+        response += "  • Rest 60-90 seconds between sets\n\n"
+        response += "**Focus on:**\n"
+        response += "  • Learning proper form first\n"
+        response += "  • Light weights — ego check at the door\n"
+        response += "  • Full body workout 3x/week to start\n\n"
+        response += "💡 **Tip:** Everyone was a beginner once. Nobody is watching you — they're all focused on themselves!"
+
+    elif predicted_tag == 'weight_loss_tips':
+        response  = "⚡ **How to Lose Weight Effectively**\n\n"
+        response += "**The Formula:**\n"
+        response += "  • Calorie deficit = calories in < calories out\n"
+        response += "  • Aim for 300-500 kcal deficit per day\n"
+        response += "  • Lose 0.5-1kg per week (sustainable pace)\n\n"
+        response += "**Top Tips:**\n"
+        response += "  • High protein diet — keeps you full longer\n"
+        response += "  • Strength train — muscle burns more calories at rest\n"
+        response += "  • Walk 8,000-10,000 steps daily\n"
+        response += "  • Cut liquid calories (soda, juice, alcohol)\n"
+        response += "  • Sleep 7-9 hours — poor sleep = more hunger\n\n"
+        response += "💡 **Tip:** Set up your profile and ask for a diet plan — I'll calculate your exact calories!"
+
+    elif predicted_tag == 'gain_weight':
+        response  = "🍗 **How to Gain Weight the Right Way**\n\n"
+        response += "**Calorie Surplus:**\n"
+        response += "  • Eat 300-500 kcal above your maintenance\n"
+        response += "  • Aim for 0.25-0.5kg gained per week\n\n"
+        response += "**Best Foods for Weight Gain:**\n"
+        response += "  • Rice, oats, bread, pasta (carbs = calories)\n"
+        response += "  • Chicken, beef, eggs, fish (protein = muscle)\n"
+        response += "  • Peanut butter, avocado, nuts (healthy fats)\n"
+        response += "  • Whole milk, Greek yogurt\n\n"
+        response += "**Training:**\n"
+        response += "  • Focus on compound lifts — squat, bench, deadlift\n"
+        response += "  • Progressive overload every week\n\n"
+        response += "💡 **Tip:** Eat every 3-4 hours. If you struggle to eat enough, add a peanut butter smoothie to your day!"
+
+    elif predicted_tag == 'abs_workout':
+        response  = "🔥 **Abs & Core Workout**\n\n"
+        response += "**The Truth About Abs:**\n"
+        response += "  • Abs are made in the kitchen — diet is key\n"
+        response += "  • You need low body fat to see them (12-15% for men, 18-22% for women)\n\n"
+        response += "**Best Ab Exercises:**\n"
+        response += "  • Plank — 3x30-60 seconds\n"
+        response += "  • Hanging Leg Raises — 3x12\n"
+        response += "  • Cable Crunches — 3x15\n"
+        response += "  • Ab Wheel Rollout — 3x10\n"
+        response += "  • Dead Bug — 3x10 each side\n\n"
+        response += "**Core Compound Lifts (best for abs):**\n"
+        response += "  • Squat, Deadlift, Overhead Press\n\n"
+        response += "💡 **Tip:** Train abs 2-3x/week. More than that won't help — they need recovery too!"
+
+    elif predicted_tag == 'sleep':
+        response  = "😴 **Sleep & Muscle Growth**\n\n"
+        response += "**How much do you need?**\n"
+        response += "  • Minimum: 7 hours\n"
+        response += "  • Optimal for athletes: 8-9 hours\n\n"
+        response += "**Why sleep matters:**\n"
+        response += "  • Growth hormone is released during deep sleep\n"
+        response += "  • Muscle repair happens while you rest\n"
+        response += "  • Poor sleep increases cortisol (kills gains)\n"
+        response += "  • Bad sleep = more hunger and cravings\n\n"
+        response += "**Better Sleep Tips:**\n"
+        response += "  • Sleep and wake at the same time daily\n"
+        response += "  • No screens 30 mins before bed\n"
+        response += "  • Keep room cool and dark\n\n"
+        response += "💡 **Tip:** Sleep is when you actually GROW. Training breaks muscle down, sleep builds it back up!"
+
+    elif predicted_tag == 'injury':
+        response  = "🩹 **Dealing with Workout Injuries**\n\n"
+        response += "**First: Use the R.I.C.E Method**\n"
+        response += "  • **Rest** — stop the activity immediately\n"
+        response += "  • **Ice** — 15-20 mins every 2-3 hours\n"
+        response += "  • **Compression** — wrap to reduce swelling\n"
+        response += "  • **Elevation** — raise above heart level\n\n"
+        response += "**Common Causes:**\n"
+        response += "  • Poor form — always prioritize technique\n"
+        response += "  • Too much weight too soon\n"
+        response += "  • Skipping warm-up\n"
+        response += "  • Overtraining without rest\n\n"
+        response += "**When to see a doctor:**\n"
+        response += "  • Sharp or severe pain\n"
+        response += "  • Swelling that doesn't go down\n"
+        response += "  • Pain that lasts more than a week\n\n"
+        response += "💡 **Tip:** Never train through sharp pain. Train around injuries — work other muscle groups while you heal!"
+
+    elif predicted_tag == 'gym_essentials':
+        response  = "🎒 **Gym Bag Essentials**\n\n"
+        response += "**Must Haves:**\n"
+        response += "  • Water bottle (at least 1L)\n"
+        response += "  • Towel (for equipment and sweat)\n"
+        response += "  • Proper training shoes\n"
+        response += "  • Comfortable workout clothes\n"
+        response += "  • Headphones\n\n"
+        response += "**Nice to Have:**\n"
+        response += "  • Lifting belt (for heavy compound lifts)\n"
+        response += "  • Wrist wraps (for bench/OHP)\n"
+        response += "  • Knee sleeves (for squats)\n"
+        response += "  • Protein shake for post-workout\n"
+        response += "  • Resistance bands (for warm-up)\n\n"
+        response += "💡 **Tip:** You don't need fancy gear to start. Water, towel, and shoes is all you really need!"
+
+    elif predicted_tag == 'home_workout':
+        response  = "🏠 **Home Workout — No Equipment Needed**\n\n"
+        response += "**Full Body Home Routine (3x/week):**\n\n"
+        response += "**Push:**\n"
+        response += "  • Push-ups — 3x max reps\n"
+        response += "  • Pike Push-ups (shoulders) — 3x10\n"
+        response += "  • Tricep Dips on chair — 3x12\n\n"
+        response += "**Pull:**\n"
+        response += "  • Doorframe rows (if available) — 3x10\n"
+        response += "  • Superman holds — 3x15\n\n"
+        response += "**Legs:**\n"
+        response += "  • Squats — 3x20\n"
+        response += "  • Lunges — 3x15 each leg\n"
+        response += "  • Glute bridges — 3x20\n\n"
+        response += "**Core:**\n"
+        response += "  • Plank — 3x45 seconds\n"
+        response += "  • Crunches — 3x20\n\n"
+        response += "💡 **Tip:** Add a backpack with books for extra resistance as you get stronger!"
+
+    elif predicted_tag == 'plateau':
+        response  = "📊 **Breaking Through a Plateau**\n\n"
+        response += "**Why Plateaus Happen:**\n"
+        response += "  • Your body has adapted to the same routine\n"
+        response += "  • Calories need adjustment\n"
+        response += "  • Not enough recovery\n\n"
+        response += "**How to Break It:**\n"
+        response += "  • Change your exercises — new stimulus = new growth\n"
+        response += "  • Increase weight, reps, or sets (progressive overload)\n"
+        response += "  • Take a deload week — lighter weights for recovery\n"
+        response += "  • Recalculate your calories — they need to change as you lose weight\n"
+        response += "  • Check your sleep and stress levels\n\n"
+        response += "💡 **Tip:** A plateau means your body got efficient — that's actually a sign of progress. Time to level up!"
+
+    elif predicted_tag == 'breathing':
+        response  = "💨 **How to Breathe When Lifting**\n\n"
+        response += "**The Golden Rule:**\n"
+        response += "  • Exhale on EFFORT (the hard part)\n"
+        response += "  • Inhale on the easier part\n\n"
+        response += "**Examples:**\n"
+        response += "  • Bench Press: Inhale going down, exhale pushing up\n"
+        response += "  • Squat: Inhale going down, exhale coming up\n"
+        response += "  • Deadlift: Big breath before lifting, exhale at top\n"
+        response += "  • Curl: Exhale curling up, inhale lowering\n\n"
+        response += "**Valsalva Maneuver (for heavy lifts):**\n"
+        response += "  • Take a big breath into your belly\n"
+        response += "  • Hold it and brace your core tight\n"
+        response += "  • This creates intra-abdominal pressure for spine protection\n\n"
+        response += "💡 **Tip:** Never hold your breath for multiple reps — only for max effort single lifts!"
+
+    elif predicted_tag == 'gym_anxiety':
+        response  = "😰 **Dealing with Gym Anxiety**\n\n"
+        response += "**You're not alone — most beginners feel this way!**\n\n"
+        response += "**Tips to Overcome It:**\n"
+        response += "  • Go during off-peak hours (early morning, midday)\n"
+        response += "  • Have a plan before you go — know your workout\n"
+        response += "  • Use headphones — creates your own bubble\n"
+        response += "  • Start with machines, not free weights\n"
+        response += "  • Bring a friend for support\n\n"
+        response += "**Remember:**\n"
+        response += "  • Everyone is focused on themselves\n"
+        response += "  • Even the biggest guy there was once a beginner\n"
+        response += "  • Gym staff are there to help — ask them!\n\n"
+        response += "💡 **Tip:** After 2-3 weeks of going regularly, the anxiety disappears completely. Push through those first sessions!"
+
+    elif predicted_tag == 'post_workout_meal':
+        response  = "🍗 **What to Eat After a Workout**\n\n"
+        response += "**Eat within 30-60 minutes after training**\n\n"
+        response += "**What you need:**\n"
+        response += "  • Protein — to repair and build muscle\n"
+        response += "  • Carbs — to replenish glycogen stores\n\n"
+        response += "**Best Post-Workout Meals:**\n"
+        response += "  • Chicken + rice + vegetables\n"
+        response += "  • Whey protein shake + banana\n"
+        response += "  • Eggs + toast\n"
+        response += "  • Greek yogurt + granola + berries\n"
+        response += "  • Tuna + rice cakes\n\n"
+        response += "💡 **Tip:** The post-workout window is real — don't skip this meal. It's when your muscles absorb nutrients best!"
+
+    elif predicted_tag == 'bulking':
+        response  = "📈 **How to Bulk Properly**\n\n"
+        response += "**Calorie Surplus:**\n"
+        response += "  • Eat 300-500 kcal above maintenance\n"
+        response += "  • Aim for 0.25-0.5kg gained per week\n"
+        response += "  • More than that = mostly fat gain\n\n"
+        response += "**Macros:**\n"
+        response += "  • Protein: 1g per lb of bodyweight\n"
+        response += "  • Carbs: 40-50% of total calories\n"
+        response += "  • Fats: 25-35% of total calories\n\n"
+        response += "**Training:**\n"
+        response += "  • Heavy compound lifts\n"
+        response += "  • Progressive overload every session\n"
+        response += "  • Limit cardio to 1-2 light sessions/week\n\n"
+        response += "💡 **Tip:** Dirty bulking (eating everything) just makes you fat. Clean bulk = slow and steady muscle gain!"
+
+    elif predicted_tag == 'cutting':
+        response  = "✂️ **How to Cut Properly**\n\n"
+        response += "**Calorie Deficit:**\n"
+        response += "  • Eat 300-500 kcal below maintenance\n"
+        response += "  • Lose 0.5-1kg per week maximum\n"
+        response += "  • Faster = more muscle loss\n\n"
+        response += "**Macros:**\n"
+        response += "  • Protein: 1-1.2g per lb (protect your muscle!)\n"
+        response += "  • Carbs: 30-40% of total calories\n"
+        response += "  • Fats: 20-30% of total calories\n\n"
+        response += "**Training:**\n"
+        response += "  • Keep lifting heavy — don't switch to light weights\n"
+        response += "  • Add 2-3 cardio sessions/week\n"
+        response += "  • HIIT is most time-efficient for fat burn\n\n"
+        response += "💡 **Tip:** The biggest cutting mistake is dropping calories too fast. Slow and steady keeps your muscle!"                             
 
     elif predicted_tag == 'bmi':
         if not user_profile.get('weight') or not user_profile.get('height'):
