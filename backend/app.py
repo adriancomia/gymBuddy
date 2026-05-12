@@ -66,7 +66,7 @@ def calculate_bmi(weight_kg, height_cm):
         category = "Overweight"
     else:
         category = "Obese"
-    return round(bmi), category
+    return round(bmi, 1), category
 
 def extract_days_from_message(msg_lower):
     day_words = {

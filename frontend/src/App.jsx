@@ -369,7 +369,6 @@ export default function App() {
       <div className="main">
         <div className="topbar">
           <div className="topbar-left">
-            <span className="topbar-title">{userName}</span>
           </div>
           {!isProfileComplete && (
             <button className="topbar-profile-alert" onClick={() => setShowProfile(true)}>
