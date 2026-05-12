@@ -197,7 +197,7 @@ def chat():
         predicted_tag = 'bmi'
         confidence = 1.0
 
-    elif any(w in msg_lower for w in ['good form', 'proper form', 'how to do', 'technique', 'correct form', 'form for', 'form on', 'proper squat', 'proper bench', 'proper deadlift']):
+    elif any(w in msg_lower for w in ['good form', 'proper form', 'how to do', 'technique', 'correct form', 'form for', 'form on', 'proper squat', 'proper bench', 'proper deadlift', 'squat form', 'bench form', 'deadlift form', 'bench press form', 'press form']):
         has_squat = any(w in msg_lower for w in ['squat', 'lunge'])
         has_bench = any(w in msg_lower for w in ['bench', 'chest', 'push up', 'pushup'])
         has_deadlift = any(w in msg_lower for w in ['deadlift', 'dead lift'])

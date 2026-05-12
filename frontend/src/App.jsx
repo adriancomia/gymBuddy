@@ -1,5 +1,9 @@
 import { useState, useRef, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
+import Onboarding from "./Onboarding";
+import "./Onboarding.css";
+import "./Onboarding.css";
+
 
 const API_URL = "https://gymbuddy-api-1wit.onrender.com";
 
@@ -175,6 +179,10 @@ export default function App() {
   const [isTyping, setIsTyping] = useState(false);
   const [showProfile, setShowProfile] = useState(false);
   const [profile, setProfile] = useState(loadProfile);
+  const [showOnboarding, setShowOnboarding] = useState(() => {
+  const p = loadProfile();
+  return !p.goal; // show if no profile set yet
+});
   const [deleteConfirm, setDeleteConfirm] = useState(null);
   const [lastTag, setLastTag] = useState(null);
   const bottomRef = useRef(null);
@@ -272,9 +280,23 @@ export default function App() {
   const followUps = FOLLOW_UPS[lastTag] || DEFAULT_FOLLOW_UPS;
   const isProfileComplete = profile.weight && profile.height && profile.goal;
   const userName = profile.name ? `, ${profile.name}` : "";
+  
 
   return (
+
     <div className="app">
+    {showOnboarding && (
+      <Onboarding onComplete={(p) => {
+        setProfile(p);
+        saveProfile(p);
+        setShowOnboarding(false);
+        addMessage(activeId, {
+          role: "assistant",
+          content: `Welcome to GymBuddy, **${p.name || "Champ"}**! 🎉\n\nYour profile is all set! Here's what I have for you:\n\n**Goal:** ${p.goal}\n**Experience:** ${p.experience}\n**Days/week:** ${p.daysPerWeek}\n\nI'm ready to build your personalized plan. Try asking for a **workout schedule** or **diet plan**!`,
+          tag: "greeting",
+        });
+      }} />
+    )}
       {/* Sidebar */}
       <div className={`sidebar ${sidebarOpen ? "open" : "closed"}`}>
         {sidebarOpen ? (
