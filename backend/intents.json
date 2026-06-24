@@ -3,7 +3,10 @@
     {
       "tag": "greeting",
       "patterns": [
-        "hello", "hi", "hey", "good morning", "good evening", "what's up", "howdy", "sup"
+        "hello", "hi", "hey", "good morning", "good evening", "what's up", "howdy", "sup",
+        "hey there", "hiya", "yo", "greetings", "hello there", "good afternoon",
+        "hi gymbuddy", "hey buddy", "what's good", "morning", "evening", "hi there",
+        "is anyone there", "hello bot", "hey bot", "hiya buddy"
       ],
       "responses": [
         "Hey there! I'm GymBuddy 💪 Ready to crush your fitness goals?",
@@ -14,7 +17,10 @@
     {
       "tag": "goodbye",
       "patterns": [
-        "bye", "goodbye", "see you", "later", "quit", "exit", "cya"
+        "bye", "goodbye", "see you", "later", "quit", "exit", "cya",
+        "see you later", "i'm done", "i'm leaving", "talk to you later", "gotta go",
+        "farewell", "peace out", "i'm out", "logging off", "see ya", "catch you later",
+        "bye bye", "i'm off", "have to go", "leaving now", "done for today"
       ],
       "responses": [
         "Stay consistent! See you next session 💪",
@@ -23,11 +29,31 @@
       ]
     },
     {
+      "tag": "thanks",
+      "patterns": [
+        "thank you", "thanks", "appreciate it", "that helped", "ty", "thx", "nice",
+        "thanks a lot", "thank you so much", "much appreciated", "thanks buddy",
+        "that was helpful", "great advice thanks", "perfect thanks", "awesome thank you",
+        "you're a great help", "this helped a lot", "thanks for the info", "cool thanks",
+        "appreciate the help", "thanks gymbuddy"
+      ],
+      "responses": [
+        "Anytime! Now go lift something heavy 💪",
+        "You're welcome! Stay consistent and results will follow 🔥",
+        "Happy to help! Remember: discipline beats motivation every time."
+      ]
+    },
+    {
       "tag": "workout_schedule",
       "patterns": [
         "make me a workout schedule", "create a workout plan", "give me a training plan",
-        "I need a workout routine", "build me a schedule", "weekly workout", "training program",
-        "what should I train", "gym schedule", "workout plan for the week", "set up my training"
+        "i need a workout routine", "build me a schedule", "weekly workout", "training program",
+        "what should i train", "gym schedule", "workout plan for the week", "set up my training",
+        "3 times a week workout schedule", "make a 4 day split", "design my training week",
+        "give me a routine", "i want a workout plan", "plan my training week",
+        "5 day workout schedule", "training schedule for the week", "how should i split my training",
+        "create a gym routine for me", "weekly training plan please", "set me up a routine",
+        "schedule my workouts"
       ],
       "responses": ["__SCHEDULE__"]
     },
@@ -35,7 +61,12 @@
       "tag": "chest_workout",
       "patterns": [
         "how to do bench press", "chest exercises", "how to train chest", "chest workout",
-        "pec exercises", "chest routine", "how do I build my chest", "chest day"
+        "pec exercises", "chest routine", "how do i build my chest", "chest day",
+        "best chest exercises", "exercises for bigger chest", "chest workout routine",
+        "how to grow my chest", "chest training tips", "exercises to build chest muscle",
+        "give me a chest workout", "what exercises work chest", "how to train my pecs",
+        "chest day exercises", "upper chest exercises", "good chest workout",
+        "exercises for chest growth", "how do i work out my chest"
       ],
       "responses": [
         "Here's a great chest workout:\n\n🏋️ **Chest Day**\n1. Bench Press — 4x8 reps\n2. Incline Dumbbell Press — 3x10 reps\n3. Cable Flyes — 3x12 reps\n4. Push-ups — 3x failure\n\n💡 **Tip:** Keep your shoulder blades retracted and drive through your chest, not your arms."
@@ -45,7 +76,12 @@
       "tag": "back_workout",
       "patterns": [
         "back exercises", "how to train back", "back workout", "lat exercises",
-        "how to do deadlift", "pull day", "back day", "how to build back"
+        "how to do deadlift", "pull day", "back day", "how to build back",
+        "best back exercises", "exercises for wider back", "how to grow my back",
+        "back training tips", "exercises for back muscle", "give me a back workout",
+        "what exercises work back", "how to train my lats", "back day exercises",
+        "upper back exercises", "good back workout", "exercises for back growth",
+        "how do i build a v taper", "pulling exercises for back"
       ],
       "responses": [
         "Here's your back workout:\n\n🏋️ **Back Day**\n1. Deadlifts — 4x5 reps\n2. Pull-ups — 4x max reps\n3. Barbell Rows — 3x8 reps\n4. Lat Pulldown — 3x12 reps\n5. Seated Cable Row — 3x12 reps\n\n💡 **Tip:** Hinge at the hips for deadlifts. Keep your chest up and core braced."
@@ -55,7 +91,12 @@
       "tag": "leg_workout",
       "patterns": [
         "leg exercises", "how to train legs", "leg workout", "squat tips",
-        "how to do squats", "leg day", "how to build legs", "glute exercises"
+        "how to do squats", "leg day", "how to build legs", "glute exercises",
+        "best leg exercises", "exercises for bigger legs", "leg training tips",
+        "exercises for leg muscle", "give me a leg workout", "what exercises work legs",
+        "how to train my quads", "leg day exercises", "hamstring exercises",
+        "good leg workout", "exercises for leg growth", "how do i grow my glutes",
+        "thigh exercises", "lower body workout", "exercises for quads and hamstrings"
       ],
       "responses": [
         "Let's not skip leg day! 🦵\n\n🏋️ **Leg Day**\n1. Barbell Squat — 4x8 reps\n2. Romanian Deadlift — 3x10 reps\n3. Leg Press — 3x12 reps\n4. Walking Lunges — 3x20 steps\n5. Calf Raises — 4x15 reps\n\n💡 **Tip:** Go deep on squats — break parallel for maximum glute activation."
@@ -65,7 +106,12 @@
       "tag": "shoulder_workout",
       "patterns": [
         "shoulder exercises", "how to train shoulders", "shoulder workout",
-        "deltoid exercises", "overhead press tips", "shoulder day", "boulder shoulders"
+        "deltoid exercises", "overhead press tips", "shoulder day", "boulder shoulders",
+        "best shoulder exercises", "exercises for bigger shoulders", "shoulder training tips",
+        "exercises for shoulder muscle", "give me a shoulder workout", "what exercises work shoulders",
+        "how to train my delts", "shoulder day exercises", "lateral raise tips",
+        "good shoulder workout", "exercises for shoulder growth", "how do i build wider shoulders",
+        "overhead pressing exercises", "rear delt exercises", "shoulder isolation exercises"
       ],
       "responses": [
         "Build those boulders! 🎯\n\n🏋️ **Shoulder Day**\n1. Overhead Press — 4x8 reps\n2. Lateral Raises — 4x15 reps\n3. Front Raises — 3x12 reps\n4. Reverse Flyes — 3x15 reps\n5. Face Pulls — 3x15 reps\n\n💡 **Tip:** Don't shrug during lateral raises. Initiate with the deltoid, not the trap."
@@ -75,7 +121,12 @@
       "tag": "arm_workout",
       "patterns": [
         "arm exercises", "bicep workout", "tricep workout", "how to build arms",
-        "curl tips", "how to do curls", "arm day", "how to get big arms"
+        "curl tips", "how to do curls", "arm day", "how to get big arms",
+        "best arm exercises", "exercises for bigger arms", "arm training tips",
+        "exercises for bicep and tricep", "give me an arm workout", "what exercises work arms",
+        "how to train my biceps", "arm day exercises", "tricep extension tips",
+        "good arm workout", "exercises for arm growth", "how do i build bigger biceps",
+        "forearm exercises", "isolation exercises for arms"
       ],
       "responses": [
         "Time to get those guns! 💪\n\n🏋️ **Arm Day**\n*Biceps:*\n1. Barbell Curl — 4x10\n2. Hammer Curl — 3x12\n3. Concentration Curl — 3x12\n\n*Triceps:*\n1. Skull Crushers — 4x10\n2. Tricep Dips — 3x12\n3. Overhead Tricep Extension — 3x12\n\n💡 **Tip:** Control the eccentric (lowering) phase for maximum muscle growth."
@@ -85,58 +136,65 @@
       "tag": "cardio",
       "patterns": [
         "cardio exercises", "how to do cardio", "running tips", "lose weight cardio",
-        "fat burning cardio", "how to improve stamina", "cardio workout", "endurance training"
+        "fat burning cardio", "how to improve stamina", "cardio workout", "endurance training",
+        "best cardio for fat loss", "how often should i do cardio", "cardio routine",
+        "hiit workout tips", "improve my running", "cardio for beginners",
+        "what cardio should i do", "cardio exercise ideas", "interval training tips",
+        "cardio to lose belly fat", "low impact cardio", "cardio machine recommendations",
+        "how long should cardio be", "cardio for endurance", "best way to do cardio"
       ],
       "responses": [
         "Let's get that heart pumping! ❤️‍🔥\n\n🏃 **Cardio Options:**\n1. **HIIT** (20 mins) — 30s sprint / 30s rest x 10 rounds\n2. **Steady State** — 30-45 min jog at 65-70% max HR\n3. **Jump Rope** — 15 mins, great for fat burn\n4. **Cycling** — 45 mins moderate pace\n\n💡 **Tip:** For fat loss, do cardio AFTER weights — your glycogen is depleted, so your body burns fat faster."
       ]
     },
     {
-      "tag": "diet_bulking",
+      "tag": "diet_general",
       "patterns": [
-        "diet for bulking", "what to eat to gain muscle", "bulking diet", "muscle gain diet",
-        "how to bulk", "foods for muscle", "eating for gains", "calorie surplus"
+        "diet tips", "healthy eating", "what should i eat", "nutrition advice",
+        "meal plan", "what to eat for fitness", "diet advice", "food for gym",
+        "give me a diet plan", "diet plan", "make me a diet plan", "nutrition plan",
+        "food plan", "eating plan", "what do i eat", "meal suggestions",
+        "what foods should i eat", "best diet for fitness", "healthy meal ideas",
+        "how should i eat to reach my goal", "give me meal ideas", "diet for my goal",
+        "eating habits for fitness", "what is a good diet"
       ],
-      "responses": [
-        "🍗 **Bulking Diet Guide**\n\n**Calorie Target:** Bodyweight (lbs) × 16-18 = daily calories\n\n**Macros:**\n• Protein: 1g per lb of bodyweight\n• Carbs: 40-50% of total calories\n• Fats: 25-35% of total calories\n\n**Best Foods:**\n🥩 Chicken, beef, eggs, tuna\n🍚 Rice, oats, sweet potato, pasta\n🥑 Avocado, olive oil, nuts\n\n💡 **Tip:** Eat every 3-4 hours. Don't skip breakfast — it breaks your overnight fast and fuels morning training."
-      ]
-    },
-    {
-      "tag": "diet_cutting",
-      "patterns": [
-        "diet for cutting", "how to lose fat", "cutting diet", "fat loss diet",
-        "what to eat to lose weight", "calorie deficit", "shredding diet", "lean diet"
-      ],
-      "responses": [
-        "🥗 **Cutting Diet Guide**\n\n**Calorie Target:** Bodyweight (lbs) × 12-14 = daily calories\n\n**Macros:**\n• Protein: 1-1.2g per lb (keep muscle!)\n• Carbs: 30-40% of total calories\n• Fats: 20-30% of total calories\n\n**Best Foods:**\n🐟 White fish, egg whites, Greek yogurt\n🥦 All vegetables (eat freely!)\n🍇 Berries, apples (low sugar fruits)\n\n💡 **Tip:** Eat protein first at every meal — it's the most satiating macro and protects your muscle."
-      ]
-    },
-    {
-  "tag": "diet_general",
-  "patterns": [
-    "diet tips", "healthy eating", "what should I eat", "nutrition advice",
-    "meal plan", "what to eat for fitness", "diet advice", "food for gym",
-    "give me a diet plan", "diet plan", "make me a diet plan", "nutrition plan",
-    "food plan", "eating plan", "what do I eat", "meal suggestions"
-  ],
-  "responses": ["__DIET__"]
+      "responses": ["__DIET__"]
     },
     {
       "tag": "protein",
       "patterns": [
-        "how much protein", "protein intake", "protein requirements", "do I need protein",
-        "protein shakes", "best protein foods", "protein for muscle"
+        "how much protein", "protein intake", "protein requirements", "do i need protein",
+        "protein shakes", "best protein foods", "protein for muscle",
+        "how much protein do i need", "protein needs for muscle gain", "daily protein target",
+        "protein sources", "how many grams of protein", "protein for my weight",
+        "is protein important", "protein for bodybuilding", "recommended protein intake",
+        "protein per day", "how much protein should i eat", "protein for recovery",
+        "best high protein foods", "how do i get enough protein"
       ],
-      "responses": [
-        "🥩 **Protein 101**\n\n**Recommended:** 0.8g–1g per pound of bodyweight daily\n\n**Best Protein Sources:**\n• Chicken breast — 31g per 100g\n• Eggs — 6g per egg\n• Greek yogurt — 17g per cup\n• Whey protein shake — 25g per scoop\n• Tuna — 30g per can\n• Lentils — 18g per cup (great for vegetarians!)\n\n💡 **Tip:** Spread protein across 4-5 meals. Your body can't fully absorb 100g of protein in one sitting."
-      ]
+      "responses": ["__PROTEIN__"]
+    },
+    {
+      "tag": "bmi",
+      "patterns": [
+        "calculate my bmi", "what is my bmi", "bmi calculator", "am i overweight",
+        "check my bmi", "body mass index", "compute my bmi", "get my bmi",
+        "find my bmi", "my bmi", "bmi check", "what's my bmi",
+        "bmi please", "show my bmi", "bmi result", "calculate bmi",
+        "am i a healthy weight", "is my weight healthy", "what's my body mass index",
+        "tell me my bmi", "bmi reading", "give me my bmi"
+      ],
+      "responses": ["__BMI__"]
     },
     {
       "tag": "beginner_advice",
       "patterns": [
-        "I am a beginner", "just starting gym", "new to working out", "beginner workout",
-        "how to start going to gym", "gym for beginners", "I've never worked out before",
-        "where do I start", "starting fitness"
+        "i am a beginner", "just starting gym", "new to working out", "beginner workout",
+        "how to start going to gym", "gym for beginners", "i've never worked out before",
+        "where do i start", "starting fitness", "tips for first time in gym",
+        "tips for gym", "first day gym", "gym for first time", "never been to gym",
+        "best exercises to start", "exercises to start", "what exercises should i do",
+        "best type of exercise", "exercises for heart health", "starting out at the gym",
+        "advice for new gym goers", "how do beginners train", "first time lifting weights"
       ],
       "responses": [
         "Welcome to your fitness journey! 🌟\n\n**Beginner's Starting Point:**\n\n1. **Start with 3 days/week** — Your body needs time to recover\n2. **Learn the basics first** — Squat, deadlift, bench press, rows, overhead press\n3. **Focus on form over weight** — Injury prevention is #1\n4. **Follow a structured program** — Try a Full Body routine (Push/Pull/Legs comes later)\n5. **Be consistent** — 3 months of consistent training beats 3 weeks of intense training\n\n💡 **Tip:** Log your workouts. Progress tracking is one of the strongest motivators."
@@ -145,8 +203,12 @@
     {
       "tag": "motivation",
       "patterns": [
-        "I don't feel like working out", "I'm lazy", "motivate me", "I want to give up",
-        "I'm tired of the gym", "no motivation", "I don't want to go", "help me stay motivated"
+        "i don't feel like working out", "i'm lazy", "motivate me", "i want to give up",
+        "i'm tired of the gym", "no motivation", "i don't want to go", "help me stay motivated",
+        "i feel like quitting", "i have no energy to train", "i keep skipping the gym",
+        "i'm not motivated today", "push me to work out", "give me motivation",
+        "i can't find motivation", "i don't want to train today", "feeling demotivated",
+        "i lost my motivation", "encourage me to work out", "help me get motivated"
       ],
       "responses": [
         "Remember WHY you started 🔥\n\nEvery rep you do today is an investment in your future self. The people you admire didn't get there by skipping days — they showed up even when they didn't feel like it.\n\n**Quick Motivation Hack:**\nTell yourself: 'I'll just do 10 minutes.' Once you start, you'll almost always finish.\n\n💪 You got this. Let's GO.",
@@ -157,42 +219,113 @@
       "tag": "rest_recovery",
       "patterns": [
         "how much rest", "rest days", "how to recover", "recovery tips", "sore muscles",
-        "DOMS", "overtraining", "how many rest days", "muscle soreness"
+        "doms", "overtraining", "how many rest days", "muscle soreness",
+        "is it okay to work out if im sore", "should i train when sore",
+        "how to reduce soreness", "active recovery tips", "how to recover faster",
+        "rest day activities", "how many days off should i take", "recovering between workouts",
+        "muscle recovery tips", "do i need rest days", "is overtraining real",
+        "how to know if i need rest", "post workout recovery"
       ],
       "responses": [
         "💤 **Recovery is Where You GROW**\n\n**Recommended Rest:**\n• Beginners: 2-3 rest days/week\n• Intermediate: 1-2 rest days/week\n• Advanced: 1 full rest day minimum\n\n**Active Recovery Tips:**\n1. Light walking or swimming\n2. Stretching / mobility work\n3. Foam rolling sore areas\n4. 7-9 hours of sleep\n5. Stay hydrated (3-4L water/day)\n\n💡 **Tip:** Muscle is built during REST, not during the workout. Never neglect recovery."
       ]
     },
     {
-  "tag": "bmi",
-  "patterns": [
-    "calculate my bmi", "what is my bmi", "bmi calculator", "am I overweight",
-    "check my bmi", "body mass index", "compute my bmi", "get my bmi",
-    "find my bmi", "my bmi", "bmi check", "what's my bmi", "bmi please",
-    "show my bmi", "bmi result", "calculate bmi"
-  ],
-  "responses": ["__BMI__"]
+      "tag": "sets_reps",
+      "patterns": [
+        "how many sets", "how many reps", "sets and reps", "how many sets should i do",
+        "how many times should i repeat", "rep range", "how much volume",
+        "how many sets of squats", "how many sets per exercise", "what rep range for muscle",
+        "sets and reps for strength", "how many reps for hypertrophy", "ideal rep range",
+        "how heavy should i lift", "reps for muscle growth", "training volume per week",
+        "how many sets per muscle group", "rep range for fat loss", "optimal sets and reps",
+        "how many sets for beginners", "reps and sets explained"
+      ],
+      "responses": [
+        "📊 **Sets & Reps Guide**\n\n**For Strength (heavy weight):**\n• 3-5 sets × 3-6 reps\n• Rest: 3-5 minutes\n\n**For Muscle Growth (hypertrophy):**\n• 3-4 sets × 8-12 reps\n• Rest: 60-90 seconds\n\n**For Endurance (light weight):**\n• 2-3 sets × 15-20 reps\n• Rest: 30-60 seconds\n\n**Per workout:**\n• Compound lifts (squat, bench): 4-5 sets\n• Isolation exercises (curls): 3 sets\n\n💡 **Tip:** Match your rep range to your goal. Most beginners do best with 3×10 on everything."
+      ]
+    },
+    {
+      "tag": "stretching",
+      "patterns": [
+        "stretching tips", "how to stretch", "best stretches", "flexibility tips",
+        "warm up exercises", "cool down stretches", "pre workout stretches",
+        "post workout stretches", "stretches before lifting", "stretches after lifting",
+        "how to improve flexibility", "dynamic stretching tips", "static stretching guide",
+        "stretches for sore muscles", "should i stretch before gym", "stretching routine",
+        "how long should i stretch", "warm up before workout", "mobility exercises",
+        "stretches for tight hips", "cool down routine", "stretching for runners"
+      ],
+      "responses": [
+        "🧘 **Stretching Guide**\n\n**Pre-Workout (Dynamic):** Move through the range of motion\n• Leg swings, arm circles, hip rotations\n• Never hold static stretches before lifting!\n\n**Post-Workout (Static):** Hold for 30-60 seconds\n• Hip flexors, hamstrings, chest, shoulders\n• This is when you improve flexibility\n\n💡 **Tip:** Dynamic stretches before training, static stretches after. Never skip either one!"
+      ]
+    },
+    {
+      "tag": "supplements",
+      "patterns": [
+        "creatine", "supplements", "pre workout", "whey protein", "bcaa", "protein powder",
+        "mass gainer", "is creatine good", "should i take supplements", "best supplements for muscle",
+        "do i need supplements", "is creatine safe", "what supplements should i take",
+        "pre workout supplements", "fat burner supplements", "supplement advice",
+        "vitamin supplements for gym", "supplements for beginners", "are supplements necessary",
+        "best protein supplement", "creatine benefits", "supplement stack for muscle gain"
+      ],
+      "responses": [
+        "💊 **Supplements Guide**\n\n**The Basics (Worth It):**\n• **Creatine Monohydrate** — increases strength and power output. 5g/day, most researched supplement ✅\n• **Whey Protein** — convenient protein source post-workout. 25g per scoop ✅\n• **Caffeine** — improves focus and endurance. Coffee works fine ✅\n\n**Optional:**\n• **BCAA** — only useful if you train fasted\n• **Fish Oil** — good for joint health and inflammation\n• **Vitamin D** — important if you don't get much sunlight\n\n**Not Worth It:**\n• Fat burners, testosterone boosters, most 'proprietary blends'\n\n💡 **Tip:** Food first, supplements second. Creatine is the only supplement with strong evidence for muscle and strength gains!"
+      ]
+    },
+    {
+      "tag": "sleep",
+      "patterns": [
+        "how much sleep do i need", "sleep for muscle growth", "sleep and gym", "sleep recovery",
+        "sleep and workout performance", "does sleep matter for muscle", "best sleep habits",
+        "how to sleep better for fitness", "sleep importance for athletes", "lack of sleep effects",
+        "sleep tips for gym goers", "how many hours of sleep for muscle", "sleep and recovery",
+        "why is sleep important for fitness", "sleep and weight loss", "improving sleep quality",
+        "sleep before workout", "rest and sleep for athletes", "sleep deprivation and exercise",
+        "good sleep habits for training"
+      ],
+      "responses": [
+        "😴 **Sleep & Muscle Growth**\n\n**How much do you need?**\n• Minimum: 7 hours\n• Optimal for athletes: 8-9 hours\n\n**Why sleep matters:**\n• Growth hormone is released during deep sleep\n• Muscle repair happens while you rest\n• Poor sleep increases cortisol (kills gains)\n• Bad sleep = more hunger and cravings\n\n**Better Sleep Tips:**\n• Sleep and wake at the same time daily\n• No screens 30 mins before bed\n• Keep room cool and dark\n\n💡 **Tip:** Sleep is when you actually GROW. Training breaks muscle down, sleep builds it back up!"
+      ]
+    },
+    {
+      "tag": "hydration",
+      "patterns": [
+        "how much water should i drink", "water intake", "hydration tips", "drink water for gym",
+        "how much water per day", "hydration and exercise", "water before workout",
+        "do i drink enough water", "signs of dehydration", "water intake for athletes",
+        "best hydration tips", "how to stay hydrated", "water and muscle growth",
+        "should i drink water during workout", "hydration during exercise",
+        "how much water for my weight", "water intake recommendations",
+        "importance of hydration", "drinking water for fat loss", "water needs for training"
+      ],
+      "responses": ["__HYDRATION__"]
+    },
+    {
+      "tag": "weight_management",
+      "patterns": [
+        "how to manage my weight", "weight management tips", "maintain my weight",
+        "control my weight", "how to lose weight", "how to gain weight",
+        "weight loss tips", "weight gain tips", "fastest way to lose weight",
+        "healthy way to gain weight", "how to maintain a healthy weight",
+        "tips to lose weight fast", "tips to gain weight fast", "weight loss strategy",
+        "weight gain strategy", "how do i manage weight", "balancing weight and muscle",
+        "weight control tips", "sustainable weight loss", "sustainable weight gain"
+      ],
+      "responses": ["__WEIGHTMGMT__"]
     },
     {
       "tag": "profile",
       "patterns": [
         "update my profile", "change my details", "set my goal", "update my weight",
-        "my profile", "set my information", "update height", "change my fitness goal"
+        "my profile", "set my information", "update height", "change my fitness goal",
+        "how do i edit my profile", "edit my information", "change my experience level",
+        "update my stats", "how to set up my profile", "where is my profile",
+        "change my training days", "i want to update my info", "edit my goal",
+        "update my fitness details", "how do i change my profile", "modify my profile"
       ],
       "responses": ["__PROFILE__"]
-    },
-    {
-      "tag": "thanks",
-      "patterns": [
-        "thank you", "thanks", "appreciate it", "that helped", "ty", "thx", "nice"
-      ],
-      "responses": [
-        "Anytime! Now go lift something heavy 💪",
-        "You're welcome! Stay consistent and results will follow 🔥",
-        "Happy to help! Remember: discipline beats motivation every time."
-      ]
     }
-    
   ]
-  
 }
