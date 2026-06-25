@@ -6,11 +6,6 @@ A fitness chatbot built with a self-trained intent classification model. No exte
 
 https://gymbuddyph.vercel.app/
 
-## API Health Check
-
-https://gymbuddy-api-1wit.onrender.com/health
-
-
 ## Stack
 
 - **Model:** scikit-learn (TF-IDF vectorizer + Logistic Regression classifier)
