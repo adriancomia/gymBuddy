@@ -1,8 +1,15 @@
 # GymBuddy
 
 A fitness chatbot built with a self-trained intent classification model. No external AI APIs are used — all responses come from a TF-IDF + Logistic Regression model trained on a custom dataset, combined with calculation logic for personalized workout schedules, diet plans, and BMI results.
-Live demo: https://gymbuddyph.vercel.app/
-Backend: https://gymbuddy-api-1wit.onrender.com/health
+
+## Live Demo
+
+https://gymbuddyph.vercel.app/
+
+## API Health Check
+
+https://gymbuddy-api-1wit.onrender.com/health
+
 
 ## Stack
 
